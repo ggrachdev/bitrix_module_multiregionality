@@ -8,7 +8,7 @@ IncludeModuleLangFile($strPath2Lang . "/install/index.php");
 
 class ggrachdev_multiregionality extends CModule {
 
-    public $MODULE_ID = 'ggrachdev.iblock_synchronizer';
+    public $MODULE_ID = 'ggrachdev.multiregionality';
     public $MODULE_VERSION;
     public $MODULE_VERSION_DATE;
     public $MODULE_NAME;
