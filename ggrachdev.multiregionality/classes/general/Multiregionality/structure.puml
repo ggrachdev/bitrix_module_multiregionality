@@ -4,31 +4,87 @@ skinparam classAttributeIconSize 0
 
 package GGrach.Multiregionality {
 
+    namespace Exception {
+        class CreateRegionsIblockException {
+            ---
+            Ошибка создания инфоблока для работы модуля
+        }
+
+        class DeterminateRegionException {
+            ---
+            Ошибки определения региона (двойной регион и тп)
+        }
+    }
+
+    namespace Cache {
+        class RuntimeCache {
+        }
+    }
+
     namespace Contract {
-        class IRegionDeterminator {
+        interface IRegionDeterminator {
+        }
+    }
+
+    namespace Configurator {
+        class RegionsConfigurator {
+            + {static} const IBLOCK_REGIONS_CODE
+            + {static} const COOKIE_NOW_REGION_NAME
         }
     }
 
     namespace Event {
         class OnEndBufferContent {
             +listen()
+            ---
+            Заменяем плейсхолдеры на странице
         }
     }
 
     namespace Repository {
         class RegionsRepository {
+            +create()
+        }
+    }
+
+    namespace Utils {
+        class UrlNormalizer {
+            ---
+            Нормализует url
+        }
+
+        class RegionChunksTextCorrector {
+            + {static} correct(string $text, Facade/RegionsFacade $facade)
+            ---
+            Заменяет плейсхолдеры на странице
         }
     }
 
     namespace Determinator {
         class RegionDeterminator {
+            ---
+            Определяет текущий регион
         }
     }
 
+    namespace Facade {
+        class RegionsFacade {
+            + constructor(string $url = null)
+            + getNowRegionData()
+            + getRegionsData() as m1
+            ---
+            Высокоуровневые операции
+        }
 
-    Determinator.RegionDeterminator --> Contract.IRegionDeterminator
+        note bottom of Facade.RegionsFacade
+            В конструкторе определяем регион исходя из $url
+            Если его не передали - то берем REQUEST_URI
+        end note
+    }
+
+    Determinator.RegionDeterminator ..|> Contract.IRegionDeterminator
     Determinator.RegionDeterminator o-- Repository.RegionsRepository
-    Repository.RegionsRepository --|> Main.Entity.DataManager
+    Repository.RegionsRepository --|> Bitrix.Main.Entity.DataManager
 }
 
 @enduml
