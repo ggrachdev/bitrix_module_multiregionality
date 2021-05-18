@@ -1,0 +1,34 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+package GGrach.Multiregionality {
+
+    namespace Contract {
+        class IRegionDeterminator {
+        }
+    }
+
+    namespace Event {
+        class OnEndBufferContent {
+            +listen()
+        }
+    }
+
+    namespace Repository {
+        class RegionsRepository {
+        }
+    }
+
+    namespace Determinator {
+        class RegionDeterminator {
+        }
+    }
+
+
+    Determinator.RegionDeterminator --> Contract.IRegionDeterminator
+    Determinator.RegionDeterminator o-- Repository.RegionsRepository
+    Repository.RegionsRepository --|> Main.Entity.DataManager
+}
+
+@enduml
