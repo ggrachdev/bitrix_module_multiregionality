@@ -1,6 +1,7 @@
 @startuml
 
 skinparam classAttributeIconSize 0
+left to right direction
 
 package GGrach.Multiregionality {
 
@@ -8,6 +9,11 @@ package GGrach.Multiregionality {
         class CreateRegionsIblockException {
             ---
             Ошибка создания инфоблока для работы модуля
+        }
+
+        class BitrixRedactionException {
+            ---
+            Ошибка редакции, версии битрикса
         }
 
         class DeterminateRegionException {
@@ -30,6 +36,8 @@ package GGrach.Multiregionality {
         class RegionsConfigurator {
             + {static} const IBLOCK_REGIONS_CODE
             + {static} const COOKIE_NOW_REGION_NAME
+            ---
+            Храним различные конфигурации
         }
     }
 
@@ -44,6 +52,8 @@ package GGrach.Multiregionality {
     namespace Repository {
         class RegionsRepository {
             +create()
+            ---
+            Обертка над базой данных для удобства
         }
     }
 
@@ -68,7 +78,7 @@ package GGrach.Multiregionality {
     }
 
     namespace Facade {
-        class RegionsFacade {
+        class Regions {
             + constructor(string $url = null)
             + getNowRegionData()
             + getRegionsData() as m1
@@ -76,14 +86,22 @@ package GGrach.Multiregionality {
             Высокоуровневые операции
         }
 
-        note bottom of Facade.RegionsFacade
+        note bottom of Facade.Regions
             В конструкторе определяем регион исходя из $url
             Если его не передали - то берем REQUEST_URI
         end note
     }
 
-    Determinator.RegionDeterminator ..|> Contract.IRegionDeterminator
+    Exception.DeterminateRegionException ..>  Determinator.RegionDeterminator
+    Exception.CreateRegionsIblockException ..>  Repository.RegionsRepository
+    Utils.UrlNormalizer ..>  Facade.Regions
+    Utils.RegionChunksTextCorrector ..>  Event.OnEndBufferContent
+    Configurator.RegionsConfigurator ..>  Repository.RegionsRepository
+    Configurator.RegionsConfigurator ..>  Event.OnEndBufferContent
+    Cache.RuntimeCache ..>  Determinator.RegionDeterminator
+    Determinator.RegionDeterminator ..>  Contract.IRegionDeterminator
     Determinator.RegionDeterminator o-- Repository.RegionsRepository
+    Facade.Regions --o Utils.RegionChunksTextCorrector
     Repository.RegionsRepository --|> Bitrix.Main.Entity.DataManager
 }
 
