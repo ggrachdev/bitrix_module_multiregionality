@@ -45,7 +45,7 @@ package GGrach.Multiregionality {
         class OnEndBufferContent {
             +listen()
             ---
-            Заменяем плейсхолдеры на странице
+            Заменяем плейсхолдеры на странице, вставляем JS исходя из PHP
         }
     }
 
@@ -59,6 +59,7 @@ package GGrach.Multiregionality {
 
     namespace Utils {
         class UrlNormalizer {
+            + {static} normalize(string $url = null): string
             ---
             Нормализует url
         }
