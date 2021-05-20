@@ -1,6 +1,6 @@
 <?php
 
-namespace \GGrach\Multireionality\Utils;
+namespace \GGrach\Multiregionality\Utils;
 
 class UrlNormalizer {
     public static function normalize(string $url): string
