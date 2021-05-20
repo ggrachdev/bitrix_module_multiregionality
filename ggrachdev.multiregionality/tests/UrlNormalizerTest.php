@@ -2,13 +2,12 @@
 
 use PHPUnit\Framework\TestCase;
 
-use UrlNormalizer
 
 class UrlNormalizerTest extends TestCase {
 
     public function testNotice() {
-        
-        $this->assertTrue(false);
+        $url = GGrach\Multiregionality\Utils\UrlNormalizer::normalize('test');
+        $this->assertSame($url, 'test');
     }
 
 }
