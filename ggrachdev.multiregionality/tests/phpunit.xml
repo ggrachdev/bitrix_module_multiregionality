@@ -4,5 +4,8 @@
         <testsuite name="UrlNormalizer">
             <file>UrlNormalizerTest.php</file>
         </testsuite>
+        <testsuite name="UrlParser">
+            <file>UrlParserTest.php</file>
+        </testsuite>
     </testsuites>
 </phpunit>

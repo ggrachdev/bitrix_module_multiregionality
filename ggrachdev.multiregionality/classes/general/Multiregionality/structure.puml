@@ -36,6 +36,7 @@ package GGrach.Multiregionality {
         class RegionsConfigurator {
             + {static} const IBLOCK_REGIONS_CODE
             + {static} const COOKIE_NOW_REGION_NAME
+            + {static} const URL_CODE_REGION = 'URL'
             ---
             Храним различные конфигурации
         }
@@ -58,6 +59,12 @@ package GGrach.Multiregionality {
     }
 
     namespace Utils {
+        class UrlParser {
+            + {static} parse(string $url = null): array
+            ---
+            Парсит url и возвращает части
+        }
+
         class UrlNormalizer {
             + {static} normalize(string $url = null): string
             ---
