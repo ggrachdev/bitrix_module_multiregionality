@@ -28,7 +28,7 @@ package GGrach.Multiregionality {
     note bottom of RegionsFactory
         Определяем регион исходя из $url
         Если его не передали - то берем REQUEST_URI
-        RegionsSingleton является оберткой над Facade.Regions со стандартными параметрами
+        RegionsFactory является оберткой над Facade.Regions со стандартными параметрами
     end note
 
     namespace Entity {
@@ -79,7 +79,7 @@ package GGrach.Multiregionality {
         }
         interface IRegionsRepository {
             +constructor(IConfigurator $configurator)
-            +create()
+            +create(): bool
             +getList(): array<Entity.Region>
             +getFilteredList(array $arFilter): array<Entity.Region>
         }

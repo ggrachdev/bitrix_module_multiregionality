@@ -41,6 +41,14 @@ class ggrachdev_multiregionality extends CModule {
      */
     public function DoInstall() {
         RegisterModule($this->MODULE_ID);
+        
+        include (__DIR__.'/../include_install.php');
+        
+        $configurator = new \GGrach\Multiregionality\Configurator\RegionsConfigurator();
+        
+        $repository = new \GGrach\Multiregionality\Repository\RegionsRepository($configurator);
+        
+        $repository->create();
     }
 
     /**
