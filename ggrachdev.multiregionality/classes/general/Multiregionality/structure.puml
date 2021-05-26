@@ -42,6 +42,7 @@ package GGrach.Multiregionality {
             + getNameForms(): array
             + getUrl(): string
             + getData(): array
+            + getProperty(string $propertyCode): array|null
             + isDefaultRegion(): bool
             ---
             Объект данных-региона

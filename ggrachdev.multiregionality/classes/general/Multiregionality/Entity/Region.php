@@ -31,6 +31,12 @@ class Region {
         return $this->data;
     }
 
+    public function getProperty(string $propertyCode) {
+        $arProperty = $this->getData()[$propertyCode];
+        
+        return empty($arProperty) ? null : $arProperty;
+    }
+
     public function isDefaultRegion(): bool {
         return $this->isDefaultRegion === true;
     }
