@@ -12,13 +12,6 @@ class RegionsFactory {
 
     private static $instances = [];
 
-    /**
-     * Одиночки не должны быть восстанавливаемыми из строк.
-     */
-    public function __wakeup() {
-        throw new \Exception("Cannot unserialize a singleton.");
-    }
-
     public static function getInstance(string $url = null, IConfigurator $configurator = null): Regions {
         if ($url === null) {
             $url = $_SERVER['SERVER_NAME'];
@@ -29,8 +22,8 @@ class RegionsFactory {
         }
 
         $key = $url . $configurator;
+        
         if (!isset(self::$instances[$key])) {
-
             $repository = new RegionsRepository($configurator);
             $determinator = new RegionDeterminator();
 
