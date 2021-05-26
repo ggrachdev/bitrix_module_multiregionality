@@ -55,4 +55,8 @@ class RegionsConfigurator implements IConfigurator {
         return 'NAME_FORM_6';
     }
 
+    public function getCodePropertyIsDefaultRegion(): string {
+        return 'IS_DEFAULT_REGION';
+    }
+
 }

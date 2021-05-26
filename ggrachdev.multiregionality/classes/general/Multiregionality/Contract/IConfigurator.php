@@ -9,6 +9,8 @@ interface IConfigurator {
     
     public function getCodeIblockRegionsCode(): string;
     
+    public function getCodePropertyIsDefaultRegion(): string;
+    
     public function getCodeTypeIblockRegionsCode(): string;
 
     public function getNameCookieNowRegion(): string;
