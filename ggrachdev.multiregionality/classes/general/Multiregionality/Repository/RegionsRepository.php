@@ -364,8 +364,15 @@ class RegionsRepository implements IRegionsRepository {
                             if ($propertyValue['MULTIPLE'] === 'N') {
                                 $correctData[$propertyCode] = $dataItem[$propertyCode . '_VALUE'];
                             } else {
-                                $correctData[$propertyCode][] = $dataItem[$propertyCode . '_VALUE'];
-                                $correctData[$propertyCode] = \array_unique($correctData[$propertyCode]);
+                                if(empty($dataItem[$propertyCode . '_VALUE']) && empty($correctData[$propertyCode]))
+                                {
+                                    $correctData[$propertyCode] = null;
+                                }
+                                else
+                                {
+                                    $correctData[$propertyCode][] = $dataItem[$propertyCode . '_VALUE'];
+                                    $correctData[$propertyCode] = \array_unique($correctData[$propertyCode]);
+                                }
                             }
                         }
                     }
