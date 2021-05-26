@@ -8,6 +8,15 @@ class UrlParser {
     public static function parse(string $url): array
     {
         $url = UrlNormalizer::normalize($url);
-        return parse_url($url);
+        
+        $url = parse_url($url);
+        
+        if(isset($url['host']))
+        {
+            $url['host'] = ltrim($url['host'], 'www');
+            $url['host'] = ltrim($url['host'], '.');
+        }
+
+        return $url;
     }
 }
