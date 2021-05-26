@@ -53,7 +53,7 @@ class RegionsRepository implements IRegionsRepository {
 
             // Добавление инфоблока
             $ib = new \CIBlock();
-            $arFields = [
+            $arFieldsIblock = [
                 "ACTIVE" => "Y", // флаг указывающий, что информационный блок является активным
                 "NAME" => "Регионы", // название создаваемого информационного блока(!! обязательно для заполнения)
                 "CODE" => "regionsMultiregionality", // код создаваемого информационного блока
@@ -84,13 +84,13 @@ class RegionsRepository implements IRegionsRepository {
                 "ELEMENT_DELETE" => "Удалить регион",
             ];
 
-            $iblockId = $ib->Add($arFields);
+            $iblockId = $ib->Add($arFieldsIblock);
 
             $resultCreate = $iblockId > 0;
 
             if ($resultCreate) {
                 $ibp = new \CIBlockProperty();
-                $arFields = [
+                $arFieldsProperty = [
                     "NAME" => "URL региона",
                     "ACTIVE" => "Y",
                     "SORT" => 1000,
@@ -98,7 +98,63 @@ class RegionsRepository implements IRegionsRepository {
                     "PROPERTY_TYPE" => "S",
                     "IBLOCK_ID" => $iblockId
                 ];
-                $propId = $ibp->Add($arFields);
+                $propId = $ibp->Add($arFieldsProperty);
+                
+                $ibp = new \CIBlockProperty();
+                $arFieldsProperty = [
+                    "NAME" => "Форма имени 1",
+                    "ACTIVE" => "Y",
+                    "SORT" => 1000,
+                    "CODE" => $this->configurator->getCodePropertyFormName1(),
+                    "PROPERTY_TYPE" => "S",
+                    "IBLOCK_ID" => $iblockId
+                ];
+                $propId = $ibp->Add($arFieldsProperty);
+                
+                $ibp = new \CIBlockProperty();
+                $arFieldsProperty = [
+                    "NAME" => "Форма имени 2",
+                    "ACTIVE" => "Y",
+                    "SORT" => 1000,
+                    "CODE" => $this->configurator->getCodePropertyFormName2(),
+                    "PROPERTY_TYPE" => "S",
+                    "IBLOCK_ID" => $iblockId
+                ];
+                $propId = $ibp->Add($arFieldsProperty);
+                
+                $ibp = new \CIBlockProperty();
+                $arFieldsProperty = [
+                    "NAME" => "Форма имени 3",
+                    "ACTIVE" => "Y",
+                    "SORT" => 1000,
+                    "CODE" => $this->configurator->getCodePropertyFormName3(),
+                    "PROPERTY_TYPE" => "S",
+                    "IBLOCK_ID" => $iblockId
+                ];
+                $propId = $ibp->Add($arFieldsProperty);
+                
+                $ibp = new \CIBlockProperty();
+                $arFieldsProperty = [
+                    "NAME" => "Форма имени 4",
+                    "ACTIVE" => "Y",
+                    "SORT" => 1000,
+                    "CODE" => $this->configurator->getCodePropertyFormName4(),
+                    "PROPERTY_TYPE" => "S",
+                    "IBLOCK_ID" => $iblockId
+                ];
+                $propId = $ibp->Add($arFieldsProperty);
+                
+                $ibp = new \CIBlockProperty();
+                $arFieldsProperty = [
+                    "NAME" => "Форма имени 5",
+                    "ACTIVE" => "Y",
+                    "SORT" => 1000,
+                    "CODE" => $this->configurator->getCodePropertyFormName5(),
+                    "PROPERTY_TYPE" => "S",
+                    "IBLOCK_ID" => $iblockId
+                ];
+                $propId = $ibp->Add($arFieldsProperty);
+                
             }
         }
 
