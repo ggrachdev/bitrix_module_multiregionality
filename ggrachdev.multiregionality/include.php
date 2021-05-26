@@ -14,6 +14,8 @@
     "\GGrach\Multiregionality\Contract\IRegionDeterminator" => "classes/general/Multiregionality/Contract/IRegionDeterminator.php",
     // Configurator
     "\GGrach\Multiregionality\Configurator\RegionsConfigurator" => "classes/general/Multiregionality/Configurator/RegionsConfigurator.php",
+    // Determinator
+    "\GGrach\Multiregionality\Determinator\RegionDeterminator" => "classes/general/Multiregionality/Determinator/RegionDeterminator.php",
     // Repository
     "\GGrach\Multiregionality\Repository\RegionsRepository" => "classes/general/Multiregionality/Repository/RegionsRepository.php",
     // Other
