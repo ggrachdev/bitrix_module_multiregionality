@@ -4,8 +4,11 @@
     // Utils
     "\GGrach\Multiregionality\Utils\UrlNormalizer" => "classes/general/Multiregionality/Utils/UrlNormalizer.php",
     "\GGrach\Multiregionality\Utils\UrlParser" => "classes/general/Multiregionality/Utils/UrlParser.php",
+    "\GGrach\Multiregionality\Utils\RegionChunksTextCorrector" => "classes/general/Multiregionality/Utils/RegionChunksTextCorrector.php",
     // Facade
     "\GGrach\Multiregionality\Facade\Regions" => "classes/general/Multiregionality/Facade/Regions.php",
+    // Events
+    "\GGrach\Multiregionality\Event\OnEndBufferContent" => "classes/general/Multiregionality/Event/OnEndBufferContent.php",
     // Entity
     "\GGrach\Multiregionality\Entity\Region" => "classes/general/Multiregionality/Entity/Region.php",
     // Contracts
@@ -21,4 +24,14 @@
     // Other
     "\GGrach\Multiregionality\RegionsFactory" => "classes/general/Multiregionality/RegionsFactory.php",
 ]);
+
+\Bitrix\Main\EventManager::getInstance()->addEventHandler(
+    "main",
+    "OnEndBufferContent",
+    [
+        "\\GGrach\\Multiregionality\\Event\\OnEndBufferContent",
+        "setChunks"
+    ]
+);
+
 ?>

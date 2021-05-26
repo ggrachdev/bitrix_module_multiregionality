@@ -14,20 +14,20 @@ use GGrach\Multiregionality\Entity\Region;
  */
 class Regions {
     
+    private $url;
     private $repository;
     private $configurator;
     private $determinator;
     
     public function __construct(string $url, IConfigurator $configurator, IRegionsRepository $repository, IRegionDeterminator $determinator) {
+        $this->url = $url;
         $this->repository = $repository;
         $this->configurator = $configurator;
         $this->determinator = $determinator;
     }
     
     public function getNowRegionData(): Region {
-        $nowRegion = new Region();
-        
-        return $nowRegion;
+        return $this->determinator->determinate($this->url, $this->repository);
     }
     
     public function getRegionsData(): array {
