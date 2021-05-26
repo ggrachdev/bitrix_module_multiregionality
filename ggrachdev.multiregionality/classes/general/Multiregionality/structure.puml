@@ -33,6 +33,10 @@ package GGrach.Multiregionality {
 
     namespace Entity {
         class Region {
+            + setName(string $name): void
+            + setNameForms(array $arForms): void
+            + setUrl(string $url): void
+            + setData(array $data): void
             + getName(): string
             + getNameForms(): array
             + getUrl(): string

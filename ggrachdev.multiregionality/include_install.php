@@ -17,5 +17,7 @@ $pathPrefix = '/local/modules/ggrachdev.multiregionality/';
     "\GGrach\Multiregionality\Configurator\RegionsConfigurator" => $pathPrefix . "classes/general/Multiregionality/Configurator/RegionsConfigurator.php",
     // Repository
     "\GGrach\Multiregionality\Repository\RegionsRepository" => $pathPrefix . "classes/general/Multiregionality/Repository/RegionsRepository.php",
+    // Other
+    "\GGrach\Multiregionality\RegionsFactory" => $pathPrefix . "classes/general/Multiregionality/RegionsFactory.php",
 ]);
 ?>
