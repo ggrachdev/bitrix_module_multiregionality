@@ -102,9 +102,9 @@ class RegionsRepository implements IRegionsRepository {
                 
                 $ibp = new \CIBlockProperty();
                 $arFieldsProperty = [
-                    "NAME" => "Форма имени 1",
+                    "NAME" => "Форма имени региона (Какой?) 1 #FORM_NAME_REGION_1#",
                     "ACTIVE" => "Y",
-                    "SORT" => 1000,
+                    "SORT" => 1100,
                     "CODE" => $this->configurator->getCodePropertyFormName1(),
                     "PROPERTY_TYPE" => "S",
                     "IBLOCK_ID" => $iblockId
@@ -113,9 +113,9 @@ class RegionsRepository implements IRegionsRepository {
                 
                 $ibp = new \CIBlockProperty();
                 $arFieldsProperty = [
-                    "NAME" => "Форма имени 2",
+                    "NAME" => "Форма имени региона (Какое?) 2 #FORM_NAME_REGION_2#",
                     "ACTIVE" => "Y",
-                    "SORT" => 1000,
+                    "SORT" => 1200,
                     "CODE" => $this->configurator->getCodePropertyFormName2(),
                     "PROPERTY_TYPE" => "S",
                     "IBLOCK_ID" => $iblockId
@@ -124,9 +124,9 @@ class RegionsRepository implements IRegionsRepository {
                 
                 $ibp = new \CIBlockProperty();
                 $arFieldsProperty = [
-                    "NAME" => "Форма имени 3",
+                    "NAME" => "Форма имени региона (Какая?) 3 #FORM_NAME_REGION_3#",
                     "ACTIVE" => "Y",
-                    "SORT" => 1000,
+                    "SORT" => 1300,
                     "CODE" => $this->configurator->getCodePropertyFormName3(),
                     "PROPERTY_TYPE" => "S",
                     "IBLOCK_ID" => $iblockId
@@ -135,9 +135,9 @@ class RegionsRepository implements IRegionsRepository {
                 
                 $ibp = new \CIBlockProperty();
                 $arFieldsProperty = [
-                    "NAME" => "Форма имени 4",
+                    "NAME" => "Форма имени региона (Какие?) 4 #FORM_NAME_REGION_4#",
                     "ACTIVE" => "Y",
-                    "SORT" => 1000,
+                    "SORT" => 1400,
                     "CODE" => $this->configurator->getCodePropertyFormName4(),
                     "PROPERTY_TYPE" => "S",
                     "IBLOCK_ID" => $iblockId
@@ -146,10 +146,21 @@ class RegionsRepository implements IRegionsRepository {
                 
                 $ibp = new \CIBlockProperty();
                 $arFieldsProperty = [
-                    "NAME" => "Форма имени 5",
+                    "NAME" => "Форма имени региона (Где?) 5 #FORM_NAME_REGION_5#",
                     "ACTIVE" => "Y",
-                    "SORT" => 1000,
+                    "SORT" => 1500,
                     "CODE" => $this->configurator->getCodePropertyFormName5(),
+                    "PROPERTY_TYPE" => "S",
+                    "IBLOCK_ID" => $iblockId
+                ];
+                $propId = $ibp->Add($arFieldsProperty);
+                
+                $ibp = new \CIBlockProperty();
+                $arFieldsProperty = [
+                    "NAME" => "Форма имени региона (Откуда? Из?) 6 #FORM_NAME_REGION_6#",
+                    "ACTIVE" => "Y",
+                    "SORT" => 1600,
+                    "CODE" => $this->configurator->getCodePropertyFormName6(),
                     "PROPERTY_TYPE" => "S",
                     "IBLOCK_ID" => $iblockId
                 ];

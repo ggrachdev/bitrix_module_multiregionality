@@ -37,5 +37,9 @@ class RegionsConfigurator implements IConfigurator {
     public function getCodePropertyFormName5(): string {
         return 'NAME_FORM_5';
     }
+    
+    public function getCodePropertyFormName6(): string {
+        return 'NAME_FORM_6';
+    }
 
 }

@@ -18,4 +18,6 @@ interface IConfigurator {
     public function getCodePropertyFormName4(): string;
     
     public function getCodePropertyFormName5(): string;
+    
+    public function getCodePropertyFormName6(): string;
 }
