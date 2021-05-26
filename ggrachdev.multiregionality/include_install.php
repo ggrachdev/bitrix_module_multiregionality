@@ -13,6 +13,7 @@ $pathPrefix = '/local/modules/ggrachdev.multiregionality/';
     // Contracts
     "\GGrach\Multiregionality\Contract\IConfigurator" => $pathPrefix . "classes/general/Multiregionality/Contract/IConfigurator.php",
     "\GGrach\Multiregionality\Contract\IRegionsRepository" => $pathPrefix . "classes/general/Multiregionality/Contract/IRegionsRepository.php",
+    "\GGrach\Multiregionality\Contract\IRegionDeterminator" => $pathPrefix . "classes/general/Multiregionality/Contract/IRegionDeterminator.php",
     // Configurator
     "\GGrach\Multiregionality\Configurator\RegionsConfigurator" => $pathPrefix . "classes/general/Multiregionality/Configurator/RegionsConfigurator.php",
     // Repository

@@ -11,6 +11,7 @@
     // Contracts
     "\GGrach\Multiregionality\Contract\IConfigurator" => "classes/general/Multiregionality/Contract/IConfigurator.php",
     "\GGrach\Multiregionality\Contract\IRegionsRepository" => "classes/general/Multiregionality/Contract/IRegionsRepository.php",
+    "\GGrach\Multiregionality\Contract\IRegionDeterminator" => "classes/general/Multiregionality/Contract/IRegionDeterminator.php",
     // Configurator
     "\GGrach\Multiregionality\Configurator\RegionsConfigurator" => "classes/general/Multiregionality/Configurator/RegionsConfigurator.php",
     // Repository

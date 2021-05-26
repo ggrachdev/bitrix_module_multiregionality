@@ -149,7 +149,7 @@ package GGrach.Multiregionality {
 
     namespace Determinator {
         class RegionDeterminator {
-            + determinateRegion(string $url, IRegionsRepository $repository): Entity.Region
+            + determinate(string $url, IRegionsRepository $repository): Entity.Region
             ---
             Определяет текущий регион
         }
