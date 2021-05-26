@@ -37,10 +37,12 @@ package GGrach.Multiregionality {
             + setNameForms(array $arForms): void
             + setUrl(string $url): void
             + setData(array $data): void
+            + setIsDefaultRegion(bool $value): void
             + getName(): string
             + getNameForms(): array
             + getUrl(): string
             + getData(): array
+            + isDefaultRegion(): bool
             ---
             Объект данных-региона
         }
@@ -93,6 +95,7 @@ package GGrach.Multiregionality {
             + getNameCookieNowRegion(): string
             + getCodePropertyUrlRegion() : string
             + getCodeTypeIblockRegionsCode() : string
+            + getCodePropertyIsDefaultRegion() : string
             + getCodePropertyFormName1() : string
             + getCodePropertyFormName2() : string
             + getCodePropertyFormName3() : string

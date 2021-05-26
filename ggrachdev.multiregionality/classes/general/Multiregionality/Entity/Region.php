@@ -6,6 +6,7 @@ class Region {
 
     protected $id;
     protected $name;
+    protected $isDefaultRegion;
     protected $nameForms = [];
     protected $url;
     protected $data = [];
@@ -30,12 +31,21 @@ class Region {
         return $this->data;
     }
 
+    public function isDefaultRegion(): bool {
+        return $this->isDefaultRegion === true;
+    }
+
+
     public function setId($id): void {
         $this->id = $id;
     }
 
     public function setName($name): void {
         $this->name = $name;
+    }
+
+    public function setIsDefaultRegion(bool $isDefaultRegion): void {
+        $this->isDefaultRegion = $isDefaultRegion;
     }
 
     public function setNameForms(array $nameForms): void {

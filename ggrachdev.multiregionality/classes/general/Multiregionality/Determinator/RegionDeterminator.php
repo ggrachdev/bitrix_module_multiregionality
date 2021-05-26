@@ -23,8 +23,16 @@ class RegionDeterminator implements IRegionDeterminator {
 
                     if (
                         !empty($urlItemData['host']) &&
-                        strcasecmp($urlItemData['host'], $urlData['host']) === 0
+                        strcasecmp(trim($urlItemData['host']), trim($urlData['host'])) === 0
                     ) {
+                        return $region;
+                    }
+                }
+
+                // Если регион не установлен, то ставим регион по умолчанию как определенный
+                foreach ($arRegions as $region) {
+                    if($region->isDefaultRegion())
+                    {
                         return $region;
                     }
                 }

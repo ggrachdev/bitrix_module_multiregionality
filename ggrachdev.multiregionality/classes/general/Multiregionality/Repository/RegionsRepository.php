@@ -187,6 +187,21 @@ class RegionsRepository implements IRegionsRepository {
                 "IBLOCK_ID" => $iblockId
             ];
             $propId = $ibp->Add($arFieldsProperty);
+
+            $ibp = new \CIBlockProperty();
+            $arFieldsProperty = [
+                "NAME" => "Устанавливать регион по умолчанию",
+                "ACTIVE" => "Y",
+                "SORT" => 1600,
+                "CODE" => $this->configurator->getCodePropertyIsDefaultRegion(),
+                "PROPERTY_TYPE" => "L",
+                "LIST_TYPE" => "C", // Тип списка - "флажки"
+                "VALUES" => [
+                   "VALUE" => "да",
+                ],
+                "IBLOCK_ID" => $iblockId
+            ];
+            $propId = $ibp->Add($arFieldsProperty);
         }
 
         return $resultCreate;
@@ -209,7 +224,8 @@ class RegionsRepository implements IRegionsRepository {
                         $this->configurator->getCodePropertyFormName3() . '_' => $this->configurator->getCodePropertyFormName3(),
                         $this->configurator->getCodePropertyFormName4() . '_' => $this->configurator->getCodePropertyFormName4(),
                         $this->configurator->getCodePropertyFormName5() . '_' => $this->configurator->getCodePropertyFormName5(),
-                        $this->configurator->getCodePropertyFormName6() . '_' => $this->configurator->getCodePropertyFormName6()
+                        $this->configurator->getCodePropertyFormName6() . '_' => $this->configurator->getCodePropertyFormName6(),
+                        $this->configurator->getCodePropertyIsDefaultRegion() . '_' => $this->configurator->getCodePropertyIsDefaultRegion()
                     ]
             ]);
 
@@ -221,6 +237,7 @@ class RegionsRepository implements IRegionsRepository {
                     $region->setName($regionItem['NAME']);
                     $region->setId($regionItem['ID']);
                     $region->setUrl($regionItem[$this->configurator->getCodePropertyUrlRegion() . '_VALUE']);
+                    $region->setIsDefaultRegion($regionItem[$this->configurator->getCodePropertyIsDefaultRegion() . '_VALUE'] == true);
                     $region->setNameForms([
                         $regionItem[$this->configurator->getCodePropertyFormName1() . '_VALUE'],
                         $regionItem[$this->configurator->getCodePropertyFormName2() . '_VALUE'],
@@ -253,7 +270,8 @@ class RegionsRepository implements IRegionsRepository {
                         $this->configurator->getCodePropertyFormName3() . '_' => $this->configurator->getCodePropertyFormName3(),
                         $this->configurator->getCodePropertyFormName4() . '_' => $this->configurator->getCodePropertyFormName4(),
                         $this->configurator->getCodePropertyFormName5() . '_' => $this->configurator->getCodePropertyFormName5(),
-                        $this->configurator->getCodePropertyFormName6() . '_' => $this->configurator->getCodePropertyFormName6()
+                        $this->configurator->getCodePropertyFormName6() . '_' => $this->configurator->getCodePropertyFormName6(),
+                        $this->configurator->getCodePropertyIsDefaultRegion() . '_' => $this->configurator->getCodePropertyIsDefaultRegion()
                     ]
             ]);
 
@@ -265,6 +283,7 @@ class RegionsRepository implements IRegionsRepository {
                     $region->setName($regionItem['NAME']);
                     $region->setId($regionItem['ID']);
                     $region->setUrl($regionItem[$this->configurator->getCodePropertyUrlRegion() . '_VALUE']);
+                    $region->setIsDefaultRegion($regionItem[$this->configurator->getCodePropertyIsDefaultRegion() . '_VALUE'] == true);
                     $region->setNameForms([
                         $regionItem[$this->configurator->getCodePropertyFormName1() . '_VALUE'],
                         $regionItem[$this->configurator->getCodePropertyFormName2() . '_VALUE'],
