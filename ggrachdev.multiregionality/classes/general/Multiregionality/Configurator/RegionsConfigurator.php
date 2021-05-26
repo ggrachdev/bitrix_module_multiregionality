@@ -5,7 +5,12 @@ namespace GGrach\Multiregionality\Configurator;
 use GGrach\Multiregionality\Contract\IConfigurator;
 
 class RegionsConfigurator implements IConfigurator {
-
+    
+    public function __toString(): string
+    {
+        return 'default_region_configurator';
+    }
+    
     public function getCodePropertyUrlRegion(): string {
         return 'URL';
     }
