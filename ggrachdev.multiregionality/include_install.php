@@ -6,6 +6,9 @@ $pathPrefix = '/local/modules/ggrachdev.multiregionality/';
     // Utils
     "\GGrach\Multiregionality\Utils\UrlNormalizer" => $pathPrefix . "classes/general/Multiregionality/Utils/UrlNormalizer.php",
     "\GGrach\Multiregionality\Utils\UrlParser" => $pathPrefix . "classes/general/Multiregionality/Utils/UrlParser.php",
+    // Entity
+    "\GGrach\Multiregionality\Entity\Region" => $pathPrefix."classes/general/Multiregionality/Entity/Region.php",
+    // Facade
     "\GGrach\Multiregionality\Facade\Regions" => $pathPrefix . "classes/general/Multiregionality/Facade/Regions.php",
     // Contracts
     "\GGrach\Multiregionality\Contract\IConfigurator" => $pathPrefix . "classes/general/Multiregionality/Contract/IConfigurator.php",
