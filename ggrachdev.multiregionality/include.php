@@ -24,4 +24,14 @@
     // Other
     "\GGrach\Multiregionality\RegionsFactory" => "classes/general/Multiregionality/RegionsFactory.php",
 ]);
+
+\Bitrix\Main\EventManager::getInstance()->addEventHandler(
+    "main",
+    "OnEndBufferContent",
+    [
+        "\\GGrach\\Multiregionality\\Event\\OnEndBufferContent",
+        "setChunks"
+    ]
+);
+
 ?>
