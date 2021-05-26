@@ -7,6 +7,8 @@
     "\GGrach\Multiregionality\Utils\RegionChunksTextCorrector" => "classes/general/Multiregionality/Utils/RegionChunksTextCorrector.php",
     // Facade
     "\GGrach\Multiregionality\Facade\Regions" => "classes/general/Multiregionality/Facade/Regions.php",
+    // Events
+    "\GGrach\Multiregionality\Event\OnEndBufferContent" => "classes/general/Multiregionality/Event/OnEndBufferContent.php",
     // Entity
     "\GGrach\Multiregionality\Entity\Region" => "classes/general/Multiregionality/Entity/Region.php",
     // Contracts

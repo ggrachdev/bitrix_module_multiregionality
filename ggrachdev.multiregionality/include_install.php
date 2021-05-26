@@ -9,6 +9,8 @@ $pathPrefix = '/local/modules/ggrachdev.multiregionality/';
     "\GGrach\Multiregionality\Utils\RegionChunksTextCorrector" => $pathPrefix . "classes/general/Multiregionality/Utils/RegionChunksTextCorrector.php",
     // Entity
     "\GGrach\Multiregionality\Entity\Region" => $pathPrefix."classes/general/Multiregionality/Entity/Region.php",
+    // Events
+    "\GGrach\Multiregionality\Event\OnEndBufferContent" => $pathPrefix."classes/general/Multiregionality/Event/OnEndBufferContent.php",
     // Facade
     "\GGrach\Multiregionality\Facade\Regions" => $pathPrefix . "classes/general/Multiregionality/Facade/Regions.php",
     // Contracts
