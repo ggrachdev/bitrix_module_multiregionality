@@ -1,0 +1,204 @@
+@startuml
+
+skinparam classAttributeIconSize 0
+
+package Tests {
+    class UrlParserTest {
+    }
+
+    class UrlNormalizerTest {
+    }
+
+    class DeterminatorTest {
+    }
+
+    class RegionChunksTextCorrectorTest {
+    }
+}
+
+package GGrach.Multiregionality {
+
+    class RegionsFactory #palegreen ##black {
+        - array<Facade.Regions> instances
+        + {static} getInstance(string $url = $_SERVER['REQUEST_URI'], IConfigurator $configurator = null): Facade.Regions
+        ---
+        Точка входа и взаимодействия с модулем, фабрика-легковес
+    }
+
+    note bottom of RegionsFactory
+        Определяем регион исходя из $url
+        Если его не передали - то берем REQUEST_URI
+        RegionsFactory является оберткой над Facade.Regions со стандартными параметрами
+    end note
+
+    namespace Entity {
+        class Region {
+            + setName(string $name): void
+            + setNameForms(array $arForms): void
+            + setUrl(string $url): void
+            + setData(array $data): void
+            + setIsDefaultRegion(bool $value): void
+            + getName(): string
+            + getNameForms(): array
+            + getUrl(): string
+            + getData(): array
+            + isDefaultRegion(): bool
+            ---
+            Объект данных-региона
+        }
+    }
+
+    namespace Presenter {
+        class RegionsPresenter {
+            + constructor(Facade.Regions $facade)
+            + toJs()
+            ---
+            Объект данных-региона
+        }
+    }
+
+    namespace Exception {
+        class CreateRegionsIblockException {
+            ---
+            Ошибка создания инфоблока для работы модуля
+        }
+
+        class BitrixRedactionException {
+            ---
+            Ошибка редакции, версии битрикса
+        }
+
+        class DeterminateRegionException {
+            ---
+            Ошибки определения региона (двойной регион и тп)
+        }
+    }
+
+    namespace Cache {
+        class RuntimeCache {
+        }
+    }
+
+    namespace Contract {
+        interface IRegionDeterminator {
+            + determinateRegion(string $url, IRegionsRepository $repository): Entity.Region
+        }
+        interface IRegionsRepository {
+            +constructor(IConfigurator $configurator)
+            +create(): bool
+            +getList(): array<Entity.Region>
+            +getFilteredList(array $arFilter): array<Entity.Region>
+        }
+        interface IConfigurator {
+            + __toString(): string
+            + getCodeIblockRegionsApi(): string
+            + getNameCookieNowRegion(): string
+            + getCodePropertyUrlRegion() : string
+            + getCodeTypeIblockRegionsCode() : string
+            + getCodePropertyIsDefaultRegion() : string
+            + getCodePropertyFormName1() : string
+            + getCodePropertyFormName2() : string
+            + getCodePropertyFormName3() : string
+            + getCodePropertyFormName4() : string
+            + getCodePropertyFormName5() : string
+            + getCodePropertyFormName6() : string
+        }
+    }
+
+    namespace Configurator {
+        class RegionsConfigurator {
+            - string $codeIblockRegionsApi = 'regionsMultiregionalityApiCode'
+            - string $cookieNowRegionName = 'NOW_REGION'
+            - string $urlCodeRegion = 'URL'
+            ---
+            Храним различные конфигурации с get set, реализуя IConfigurator
+        }
+    }
+
+    namespace Event {
+        class OnEndBufferContent {
+            +listen()
+            ---
+            Заменяем плейсхолдеры на странице, вставляем JS исходя из PHP
+        }
+    }
+
+    namespace Repository {
+        class RegionsRepository {
+            ---
+            Обертка над базой данных для удобства
+        }
+    }
+
+    namespace Utils {
+        class UrlParser {
+            + {static} parse(string $url = null): array
+            ---
+            Парсит url и возвращает части
+        }
+
+        class UrlNormalizer {
+            + {static} normalize(string $url = null): string
+            ---
+            Нормализует url
+        }
+
+        class RegionChunksTextCorrector {
+            + {static} correct(string $text, Entity.Region $region)
+            ---
+            Заменяет плейсхолдеры на странице
+        }
+    }
+
+    namespace Determinator {
+        class RegionDeterminator {
+            + determinate(string $url, IRegionsRepository $repository): Entity.Region
+            ---
+            Определяет текущий регион
+        }
+    }
+
+    namespace Facade {
+        class Regions {
+            + constructor(string $url, IConfigurator $configurator, IRegionsRepository $repository, IRegionDeterminator $determinator)
+            + getNowRegionData(): Entity.Region
+            + getRegionsData(): array<Entity.Region>
+            + getConfigurator(): Contract.IConfigurator
+            ---
+            Высокоуровневые операции
+        }
+    }
+
+    Exception.DeterminateRegionException ..>  Determinator.RegionDeterminator
+    Exception.CreateRegionsIblockException ..>  Repository.RegionsRepository
+
+    Utils.UrlNormalizer ..>  Utils.UrlParser
+    Utils.UrlParser ..>  Determinator.RegionDeterminator
+    Utils.RegionChunksTextCorrector ..>  Event.OnEndBufferContent
+
+    Presenter.RegionsPresenter ..>  Event.OnEndBufferContent
+
+    Configurator.RegionsConfigurator ..>  Contract.IConfigurator
+
+    Determinator.RegionDeterminator ..>  Contract.IRegionDeterminator
+    
+    Cache.RuntimeCache ..>  Determinator.RegionDeterminator
+
+    Facade.Regions --o Utils.RegionChunksTextCorrector
+    Facade.Regions ..> RegionsFactory
+
+    Contract.IConfigurator --o Facade.Regions
+    Contract.IConfigurator --o  RegionsFactory
+
+    Contract.IRegionsRepository --o Determinator.RegionDeterminator 
+    Contract.IRegionsRepository --o  Facade.Regions
+
+    Contract.IRegionDeterminator --o  Facade.Regions
+
+    Repository.RegionsRepository --|> Bitrix.Main.Entity.DataManager
+    Repository.RegionsRepository ..>  Contract.IRegionsRepository
+
+    RegionsFactory ..>  Event.OnEndBufferContent
+}
+
+@enduml

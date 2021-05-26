@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="/var/www/testing/data/www/testing.bx24.org/local/php_interface/bootstrap.php">
+    <testsuites>
+        <testsuite name="UrlNormalizer">
+            <file>UrlNormalizerTest.php</file>
+        </testsuite>
+        <testsuite name="UrlParser">
+            <file>UrlParserTest.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
