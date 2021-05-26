@@ -183,14 +183,91 @@ class RegionsRepository implements IRegionsRepository {
         return $resultCreate;
     }
 
-    public function getFilteredList(array $arFilter): array {
+    public function getFilteredList(array $arFilter = []): array {
         $arList = [];
+
+        if (!empty($this->iblockEntityClassName)) {
+            $dbRegions = $this->iblockEntityClassName::getList([
+                    "cache" => ["ttl" => 3600],
+                    "filter" => $arFilter,
+                    'select' => [
+                        'ID',
+                        'NAME',
+                        'CODE',
+                        $this->configurator->getCodePropertyUrlRegion() . '_' => $this->configurator->getCodePropertyUrlRegion(),
+                        $this->configurator->getCodePropertyFormName1() . '_' => $this->configurator->getCodePropertyFormName1(),
+                        $this->configurator->getCodePropertyFormName2() . '_' => $this->configurator->getCodePropertyFormName2(),
+                        $this->configurator->getCodePropertyFormName3() . '_' => $this->configurator->getCodePropertyFormName3(),
+                        $this->configurator->getCodePropertyFormName4() . '_' => $this->configurator->getCodePropertyFormName4(),
+                        $this->configurator->getCodePropertyFormName5() . '_' => $this->configurator->getCodePropertyFormName5(),
+                        $this->configurator->getCodePropertyFormName6() . '_' => $this->configurator->getCodePropertyFormName6()
+                    ]
+            ]);
+
+            $resRegions = $dbRegions->fetchAll();
+
+            if (!empty($resRegions)) {
+                foreach ($resRegions as $regionItem) {
+                    $region = new Region();
+                    $region->setName($regionItem['NAME']);
+                    $region->setId($regionItem['ID']);
+                    $region->setUrl($regionItem[$this->configurator->getCodePropertyUrlRegion() . '_VALUE']);
+                    $region->setNameForms([
+                        $regionItem[$this->configurator->getCodePropertyFormName1() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName2() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName3() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName4() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName5() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName6() . '_VALUE'],
+                    ]);
+                    $arList[] = $region;
+                }
+            }
+        }
 
         return $arList;
     }
 
     public function getList(): array {
         $arList = [];
+
+        if (!empty($this->iblockEntityClassName)) {
+            $dbRegions = $this->iblockEntityClassName::getList([
+                    "cache" => ["ttl" => 3600],
+                    'select' => [
+                        'ID',
+                        'NAME',
+                        'CODE',
+                        $this->configurator->getCodePropertyUrlRegion() . '_' => $this->configurator->getCodePropertyUrlRegion(),
+                        $this->configurator->getCodePropertyFormName1() . '_' => $this->configurator->getCodePropertyFormName1(),
+                        $this->configurator->getCodePropertyFormName2() . '_' => $this->configurator->getCodePropertyFormName2(),
+                        $this->configurator->getCodePropertyFormName3() . '_' => $this->configurator->getCodePropertyFormName3(),
+                        $this->configurator->getCodePropertyFormName4() . '_' => $this->configurator->getCodePropertyFormName4(),
+                        $this->configurator->getCodePropertyFormName5() . '_' => $this->configurator->getCodePropertyFormName5(),
+                        $this->configurator->getCodePropertyFormName6() . '_' => $this->configurator->getCodePropertyFormName6()
+                    ]
+            ]);
+
+            $resRegions = $dbRegions->fetchAll();
+
+            if (!empty($resRegions)) {
+                foreach ($resRegions as $regionItem) {
+                    $region = new Region();
+                    $region->setName($regionItem['NAME']);
+                    $region->setId($regionItem['ID']);
+                    $region->setUrl($regionItem[$this->configurator->getCodePropertyUrlRegion() . '_VALUE']);
+                    $region->setNameForms([
+                        $regionItem[$this->configurator->getCodePropertyFormName1() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName2() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName3() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName4() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName5() . '_VALUE'],
+                        $regionItem[$this->configurator->getCodePropertyFormName6() . '_VALUE'],
+                    ]);
+                    $arList[] = $region;
+                }
+            }
+        }
 
         return $arList;
     }
