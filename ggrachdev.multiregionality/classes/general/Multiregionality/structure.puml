@@ -87,6 +87,7 @@ package GGrach.Multiregionality {
             + getCodeIblockRegionsApi(): string
             + getNameCookieNowRegion(): string
             + getCodePropertyUrlRegion() : string
+            + getCodeTypeIblockRegionsCode() : string
             + getCodePropertyFormName1() : string
             + getCodePropertyFormName2() : string
             + getCodePropertyFormName3() : string

@@ -4,6 +4,10 @@ namespace GGrach\Multiregionality\Contract;
 
 interface IConfigurator {
     public function getCodeIblockRegionsApi(): string;
+    
+    public function getCodeIblockRegionsCode(): string;
+    
+    public function getCodeTypeIblockRegionsCode(): string;
 
     public function getNameCookieNowRegion(): string;
 

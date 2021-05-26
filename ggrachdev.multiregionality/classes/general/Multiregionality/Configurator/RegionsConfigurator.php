@@ -18,6 +18,14 @@ class RegionsConfigurator implements IConfigurator {
         return 'regionsMultiregionalityApiCode';
     }
 
+    public function getCodeTypeIblockRegionsCode(): string {
+        return 'multiregionalityIblockType';
+    }
+
+    public function getCodeIblockRegionsCode(): string {
+        return 'regionsMultiregionalityCode';
+    }
+
     public function getCodePropertyFormName1(): string {
         return 'NAME_FORM_1';
     }
