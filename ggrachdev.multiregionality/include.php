@@ -23,6 +23,7 @@
     "\GGrach\Multiregionality\Repository\RegionsRepository" => "classes/general/Multiregionality/Repository/RegionsRepository.php",
     // Other
     "\GGrach\Multiregionality\RegionsFactory" => "classes/general/Multiregionality/RegionsFactory.php",
+    "\GGrach\Multiregionality\Cache\RuntimeCache" => "classes/general/Multiregionality/Cache/RuntimeCache.php",
 ]);
 
 \Bitrix\Main\EventManager::getInstance()->addEventHandler(

@@ -32,7 +32,9 @@ class Region {
     }
 
     public function getProperty(string $propertyCode) {
-        return array_column($this->getData(), $propertyCode.'_VALUE');
+        $arProperty = $this->getData()[$propertyCode];
+        
+        return empty($arProperty) ? null : $arProperty;
     }
 
     public function isDefaultRegion(): bool {

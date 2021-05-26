@@ -25,5 +25,6 @@ $pathPrefix = '/local/modules/ggrachdev.multiregionality/';
     "\GGrach\Multiregionality\Repository\RegionsRepository" => $pathPrefix . "classes/general/Multiregionality/Repository/RegionsRepository.php",
     // Other
     "\GGrach\Multiregionality\RegionsFactory" => $pathPrefix . "classes/general/Multiregionality/RegionsFactory.php",
+    "\GGrach\Multiregionality\Cache\RuntimeCache" => $pathPrefix."classes/general/Multiregionality/Cache/RuntimeCache.php",
 ]);
 ?>

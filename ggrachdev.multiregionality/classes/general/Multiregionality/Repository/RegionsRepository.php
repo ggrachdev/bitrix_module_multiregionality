@@ -6,6 +6,7 @@ use GGrach\Multiregionality\Contract\IRegionsRepository;
 use GGrach\Multiregionality\Contract\IConfigurator;
 use GGrach\Multiregionality\Entity\Region;
 use \Bitrix\Iblock\Iblock;
+use GGrach\Multiregionality\Cache\RuntimeCache;
 
 class RegionsRepository implements IRegionsRepository {
 
@@ -206,6 +207,11 @@ class RegionsRepository implements IRegionsRepository {
     }
 
     public function getFilteredList(array $arFilter = []): array {
+
+        if (RuntimeCache::has($this->configurator . '_list')) {
+            return RuntimeCache::get($this->configurator . '_list_' . \serialize($arFilter));
+        }
+
         $arList = [];
 
         if (!empty($this->iblockEntityClassName)) {
@@ -272,13 +278,22 @@ class RegionsRepository implements IRegionsRepository {
                         $arList[$regionItem['ID']] = $region;
                     }
                 }
+
+                $this->correctDataRegionsList($arList, $propertyList);
             }
         }
+
+        RuntimeCache::set($this->configurator . '_list_' . \serialize($arFilter), $arList);
 
         return $arList;
     }
 
     private function getPropertyListIblock(): array {
+
+        if (RuntimeCache::has($this->configurator . '_property_list')) {
+            return RuntimeCache::get($this->configurator . '_property_list');
+        }
+
         $propertyList = [];
 
         $arFilter = [
@@ -291,13 +306,82 @@ class RegionsRepository implements IRegionsRepository {
         );
 
         while ($element = $rsProperty->Fetch()) {
+
+            if ($element['PROPERTY_TYPE'] === 'L') {
+
+                $element['VALUES'] = [];
+
+                $dbValuesList = \CIBlockPropertyEnum::GetList([], [
+                        "IBLOCK_ID" => $this->iblockIdRepository,
+                        "CODE" => $element['CODE']
+                ]);
+                while ($value = $dbValuesList->Fetch()) {
+                    $element['VALUES'][$value['ID']] = $value;
+                }
+            }
+
             $propertyList[$element['CODE']] = $element;
         }
+
+        RuntimeCache::set($this->configurator . '_property_list', $propertyList);
 
         return $propertyList;
     }
 
+    private function correctDataRegionsList(array $arListRegions, array $arPropertyIblock): void {
+
+        foreach ($arListRegions as $region) {
+            $data = $region->getData();
+
+            $correctData = [];
+
+            foreach ($arPropertyIblock as $propertyCode => $propertyValue) {
+
+                $correctData[$propertyCode] = [];
+
+                foreach ($data as $dataItem) {
+
+                    if ($propertyValue['PROPERTY_TYPE'] === 'L') {
+                        if (array_key_exists($propertyCode . '_VALUE', $dataItem)) {
+
+                            $selectedIdList = $dataItem[$propertyCode . '_VALUE'];
+
+                            if (empty($selectedIdList)) {
+                                $correctData[$propertyCode] = null;
+                            } else {
+
+                                if ($propertyValue['MULTIPLE'] === 'N') {
+                                    $correctData[$propertyCode] = $propertyValue['VALUES'][$selectedIdList];
+                                } else {
+
+                                    $correctData[$propertyCode][$selectedIdList] = $propertyValue['VALUES'][$selectedIdList];
+                                }
+                            }
+                        }
+                    } else {
+                        if (array_key_exists($propertyCode . '_VALUE', $dataItem)) {
+
+                            if ($propertyValue['MULTIPLE'] === 'N') {
+                                $correctData[$propertyCode] = $dataItem[$propertyCode . '_VALUE'];
+                            } else {
+                                $correctData[$propertyCode][] = $dataItem[$propertyCode . '_VALUE'];
+                                $correctData[$propertyCode] = \array_unique($correctData[$propertyCode]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            $region->setData($correctData);
+        }
+    }
+
     public function getList(): array {
+
+        if (RuntimeCache::has($this->configurator . '_list')) {
+            return RuntimeCache::get($this->configurator . '_list');
+        }
+
         $arList = [];
 
         if (!empty($this->iblockEntityClassName)) {
@@ -363,8 +447,12 @@ class RegionsRepository implements IRegionsRepository {
                         $arList[$regionItem['ID']] = $region;
                     }
                 }
+                
+                $this->correctDataRegionsList($arList, $propertyList);
             }
         }
+
+        RuntimeCache::set($this->configurator . '_list', $arList);
 
         return $arList;
     }
