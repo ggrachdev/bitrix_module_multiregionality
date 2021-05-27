@@ -23,6 +23,7 @@
     "\GGrach\Multiregionality\Repository\RegionsRepository" => "classes/general/Multiregionality/Repository/RegionsRepository.php",
     // Other
     "\GGrach\Multiregionality\RegionsFactory" => "classes/general/Multiregionality/RegionsFactory.php",
+    // Cache
     "\GGrach\Multiregionality\Cache\RuntimeCache" => "classes/general/Multiregionality/Cache/RuntimeCache.php",
 ]);
 

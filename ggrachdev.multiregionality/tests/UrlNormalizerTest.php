@@ -6,6 +6,7 @@ class UrlNormalizerTest extends TestCase {
 
     /**
      * @dataProvider urlProvider
+     * @covers UrlNormalizer::normalize
      */
     public function testNormalize($url, $normalizedUrl) {
         $url = GGrach\Multiregionality\Utils\UrlNormalizer::normalize($url);
