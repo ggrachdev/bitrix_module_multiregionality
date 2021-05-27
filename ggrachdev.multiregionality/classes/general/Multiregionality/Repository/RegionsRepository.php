@@ -248,9 +248,9 @@ class RegionsRepository implements IRegionsRepository {
             }
 
             $dbRegions = $this->iblockEntityClassName::getList([
-                    "cache" => ["ttl" => 3600],
-                    "filter" => $arFilter,
-                    'select' => $arSelect
+                "cache" => ["ttl" => 3600],
+                "filter" => $arFilter,
+                'select' => $arSelect
             ]);
 
             $resRegions = $dbRegions->fetchAll();
@@ -307,30 +307,38 @@ class RegionsRepository implements IRegionsRepository {
         $arFilter = [
             'IBLOCK_ID' => $this->iblockIdRepository
         ];
+        
+        $dbProperties = \Bitrix\Iblock\PropertyTable::getList([
+            'filter' => $arFilter
+        ]);
+        
+        $arProperties = $dbProperties->fetchAll();
+        
+        if(!empty($arProperties)) {
+            foreach ($arProperties as $element) {
+                if ($element['PROPERTY_TYPE'] === 'L') {
 
-        $rsProperty = \CIBlockProperty::GetList(
-                [],
-                $arFilter
-        );
-
-        while ($element = $rsProperty->Fetch()) {
-
-            if ($element['PROPERTY_TYPE'] === 'L') {
-
-                $element['VALUES'] = [];
-
-                $dbValuesList = \CIBlockPropertyEnum::GetList([], [
-                        "IBLOCK_ID" => $this->iblockIdRepository,
-                        "CODE" => $element['CODE']
-                ]);
-                while ($value = $dbValuesList->Fetch()) {
-                    $element['VALUES'][$value['ID']] = $value;
+                    $element['VALUES'] = [];
+                    
+                    $dbValuesList = \Bitrix\Iblock\PropertyEnumerationTable::getList([
+                        'filter' => [
+                            "PROPERTY_ID" => $element['ID']
+                        ]
+                    ]);
+                    
+                    $arPropertyValues = $dbValuesList->fetchAll();
+                    
+                    if(!empty($arPropertyValues)) {
+                        foreach ($arPropertyValues as $value) {
+                            $element['VALUES'][$value['ID']] = $value;
+                        }
+                    }
                 }
+
+                $propertyList[$element['CODE']] = $element;
             }
-
-            $propertyList[$element['CODE']] = $element;
         }
-
+        
         RuntimeCache::set($keyCache, $propertyList);
 
         return $propertyList;
@@ -427,8 +435,8 @@ class RegionsRepository implements IRegionsRepository {
             }
 
             $dbRegions = $this->iblockEntityClassName::getList([
-                    "cache" => ["ttl" => 3600],
-                    'select' => $arSelect
+                "cache" => ["ttl" => 3600],
+                'select' => $arSelect
             ]);
 
             $resRegions = $dbRegions->fetchAll();
