@@ -177,9 +177,9 @@ package GGrach.Multiregionality {
 
     Presenter.RegionsPresenter ..>  Event.OnEndBufferContent
 
-    Configurator.RegionsConfigurator ..>  Contract.IConfigurator
+    Configurator.RegionsConfigurator ..|>  Contract.IConfigurator
 
-    Determinator.RegionDeterminator ..>  Contract.IRegionDeterminator
+    Determinator.RegionDeterminator ..|>  Contract.IRegionDeterminator
     
     Cache.RuntimeCache ..>  Determinator.RegionDeterminator
 
@@ -196,7 +196,7 @@ package GGrach.Multiregionality {
 
     Bitrix.Main.Entity.DataManager ..> Repository.RegionsRepository
 
-    Repository.RegionsRepository ..>  Contract.IRegionsRepository
+    Repository.RegionsRepository ..|>  Contract.IRegionsRepository
 
     RegionsFactory ..>  Event.OnEndBufferContent
 }
