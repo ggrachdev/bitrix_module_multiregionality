@@ -8,8 +8,10 @@ use GGrach\Multiregionality\Determinator\RegionDeterminator;
 use GGrach\Multiregionality\Repository\RegionsRepository;
 use GGrach\Multiregionality\Configurator\RegionsConfigurator;
 
-class RegionsFactory {
+final class RegionsFactory {
 
+    private function __construct() { }
+    
     private static $instances = [];
 
     public static function getInstance(string $url = null, IConfigurator $configurator = null): Regions {
@@ -21,7 +23,7 @@ class RegionsFactory {
             $configurator = new RegionsConfigurator();
         }
 
-        $key = $url . $configurator;
+        $key = $url . \spl_object_hash($configurator);
         
         if (!isset(self::$instances[$key])) {
             $repository = new RegionsRepository($configurator);

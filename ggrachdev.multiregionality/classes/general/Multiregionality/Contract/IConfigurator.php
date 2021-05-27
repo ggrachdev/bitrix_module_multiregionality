@@ -5,8 +5,6 @@ namespace GGrach\Multiregionality\Contract;
 interface IConfigurator {
     public function getCodeIblockRegionsApi(): string;
     
-    public function __toString(): string;
-    
     public function getCodeIblockRegionsCode(): string;
     
     public function getCodePropertyIsDefaultRegion(): string;

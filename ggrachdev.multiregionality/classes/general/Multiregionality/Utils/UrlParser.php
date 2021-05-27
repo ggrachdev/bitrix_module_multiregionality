@@ -9,14 +9,14 @@ class UrlParser {
     {
         $url = UrlNormalizer::normalize($url);
         
-        $url = parse_url($url);
+        $urlChunks = parse_url($url);
         
-        if(isset($url['host']))
+        if(isset($urlChunks['host']))
         {
-            $url['host'] = ltrim($url['host'], 'www');
-            $url['host'] = ltrim($url['host'], '.');
+            $urlChunks['host'] = ltrim($urlChunks['host'], 'www');
+            $urlChunks['host'] = ltrim($urlChunks['host'], '.');
         }
 
-        return $url;
+        return $urlChunks;
     }
 }

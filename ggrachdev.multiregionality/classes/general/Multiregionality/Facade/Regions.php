@@ -12,7 +12,7 @@ use GGrach\Multiregionality\Entity\Region;
  *
  * @author ggrachdev
  */
-class Regions {
+final class Regions {
     
     private $url;
     private $repository;

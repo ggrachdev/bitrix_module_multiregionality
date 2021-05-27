@@ -103,8 +103,13 @@ class RegionsRepository implements IRegionsRepository {
             ];
 
             $iblockId = $ib->Add($arFieldsIblock);
-
+            
             $resultCreate = $iblockId > 0;
+            
+            if($resultCreate)
+            {
+                $this->iblockIdRepository = $iblockId;
+            }
         } else {
             $iblockId = $this->iblockIdRepository;
         }
@@ -208,8 +213,10 @@ class RegionsRepository implements IRegionsRepository {
 
     public function getFilteredList(array $arFilter = []): array {
 
-        if (RuntimeCache::has($this->configurator . '_list')) {
-            return RuntimeCache::get($this->configurator . '_list_' . \serialize($arFilter));
+        $keyCache = \spl_object_hash($this->configurator). '_list'. \serialize($arFilter);
+        
+        if (RuntimeCache::has($keyCache)) {
+            return RuntimeCache::get($keyCache);
         }
 
         $arList = [];
@@ -283,15 +290,16 @@ class RegionsRepository implements IRegionsRepository {
             }
         }
 
-        RuntimeCache::set($this->configurator . '_list_' . \serialize($arFilter), $arList);
+        RuntimeCache::set($keyCache, $arList);
 
         return $arList;
     }
 
     private function getPropertyListIblock(): array {
 
-        if (RuntimeCache::has($this->configurator . '_property_list')) {
-            return RuntimeCache::get($this->configurator . '_property_list');
+        $keyCache = \spl_object_hash($this->configurator) . '_property_list';
+        if (RuntimeCache::has($keyCache)) {
+            return RuntimeCache::get($keyCache);
         }
 
         $propertyList = [];
@@ -323,7 +331,7 @@ class RegionsRepository implements IRegionsRepository {
             $propertyList[$element['CODE']] = $element;
         }
 
-        RuntimeCache::set($this->configurator . '_property_list', $propertyList);
+        RuntimeCache::set($keyCache, $propertyList);
 
         return $propertyList;
     }
@@ -385,8 +393,9 @@ class RegionsRepository implements IRegionsRepository {
 
     public function getList(): array {
 
-        if (RuntimeCache::has($this->configurator . '_list')) {
-            return RuntimeCache::get($this->configurator . '_list');
+        $keyCache = \spl_object_hash($this->configurator) . '_list';
+        if (RuntimeCache::has($keyCache)) {
+            return RuntimeCache::get($keyCache);
         }
 
         $arList = [];
@@ -459,7 +468,7 @@ class RegionsRepository implements IRegionsRepository {
             }
         }
 
-        RuntimeCache::set($this->configurator . '_list', $arList);
+        RuntimeCache::set($keyCache, $arList);
 
         return $arList;
     }

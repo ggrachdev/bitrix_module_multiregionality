@@ -7,7 +7,7 @@ class UrlNormalizerTest extends TestCase {
     /**
      * @dataProvider urlProvider
      */
-    public function testNotice($url, $normalizedUrl) {
+    public function testNormalize($url, $normalizedUrl) {
         $url = GGrach\Multiregionality\Utils\UrlNormalizer::normalize($url);
         $this->assertSame($url, $normalizedUrl);
     }
