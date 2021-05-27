@@ -213,7 +213,7 @@ class RegionsRepository implements IRegionsRepository {
 
     public function getFilteredList(array $arFilter = []): array {
 
-        $keyCache = \spl_object_hash($this->configurator). '_list'. \serialize($arFilter);
+        $keyCache = $this->configurator. '_list'. \serialize($arFilter);
         
         if (RuntimeCache::has($keyCache)) {
             return RuntimeCache::get($keyCache);
@@ -297,7 +297,8 @@ class RegionsRepository implements IRegionsRepository {
 
     private function getPropertyListIblock(): array {
 
-        $keyCache = \spl_object_hash($this->configurator) . '_property_list';
+        $keyCache = $this->iblockIdRepository . '_property_list';
+        
         if (RuntimeCache::has($keyCache)) {
             return RuntimeCache::get($keyCache);
         }
@@ -401,11 +402,12 @@ class RegionsRepository implements IRegionsRepository {
 
     public function getList(): array {
 
-        $keyCache = \spl_object_hash($this->configurator) . '_list';
+        $keyCache = $this->configurator . '_list';
+        
         if (RuntimeCache::has($keyCache)) {
             return RuntimeCache::get($keyCache);
         }
-
+        
         $arList = [];
 
         if (!empty($this->iblockEntityClassName)) {

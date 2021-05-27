@@ -89,6 +89,7 @@ package GGrach.Multiregionality {
             +getFilteredList(array $arFilter): array<Entity.Region>
         }
         interface IConfigurator {
+            + __toString(): string
             + getCodeIblockRegionsApi(): string
             + getNameCookieNowRegion(): string
             + getCodePropertyUrlRegion() : string

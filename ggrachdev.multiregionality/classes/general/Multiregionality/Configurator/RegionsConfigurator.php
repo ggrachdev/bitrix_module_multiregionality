@@ -54,4 +54,8 @@ final class RegionsConfigurator implements IConfigurator {
         return 'IS_DEFAULT_REGION';
     }
 
+    public function __toString(): string {
+        return 'standart_configurator';
+    }
+
 }

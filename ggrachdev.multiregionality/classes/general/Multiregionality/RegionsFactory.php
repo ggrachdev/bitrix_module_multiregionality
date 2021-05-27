@@ -23,7 +23,7 @@ final class RegionsFactory {
             $configurator = new RegionsConfigurator();
         }
 
-        $key = $url . \spl_object_hash($configurator);
+        $key = $url . $configurator;
         
         if (!isset(self::$instances[$key])) {
             $repository = new RegionsRepository($configurator);

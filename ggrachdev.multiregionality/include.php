@@ -35,7 +35,7 @@
     ]
 );
 
-function RG() {
+function MRG() {
     return \GGrach\Multiregionality\RegionsFactory::getInstance();
 }
 
