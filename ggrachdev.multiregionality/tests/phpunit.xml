@@ -4,8 +4,14 @@
         <testsuite name="UrlNormalizer">
             <file>UrlNormalizerTest.php</file>
         </testsuite>
-        <testsuite name="UrlParser">
+        <testsuite name="UrlParserTest">
             <file>UrlParserTest.php</file>
         </testsuite>
+        <testsuite name="UrlRepositoryTest">
+            <file>UrlRepositoryTest.php</file>
+        </testsuite>
     </testsuites>
+    <php>
+      <server name="SERVER_NAME" value="irkutsk.test.ru"/>
+    </php>
 </phpunit>

@@ -2,7 +2,7 @@
 
 namespace GGrach\Multiregionality\Entity;
 
-class Region {
+final class Region {
 
     protected $id;
     protected $name;

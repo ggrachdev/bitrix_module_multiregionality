@@ -3,16 +3,14 @@
 skinparam classAttributeIconSize 0
 
 package Tests {
-    class UrlParserTest {
-    }
-
     class UrlNormalizerTest {
-    }
-
-    class DeterminatorTest {
+        + testNormalize(string $url, string $normalizedUrl): void
+        + urlProvider(): array
     }
 
     class RegionChunksTextCorrectorTest {
+        + testCorrector(string $textAfter, string $textBefore, Entity.Region $region): void
+        + dataProvider(): array
     }
 }
 
@@ -80,7 +78,7 @@ package GGrach.Multiregionality {
         }
     }
 
-    namespace Contract {
+    namespace Contract { 
         interface IRegionDeterminator {
             + determinateRegion(string $url, IRegionsRepository $repository): Entity.Region
         }
@@ -179,9 +177,9 @@ package GGrach.Multiregionality {
 
     Presenter.RegionsPresenter ..>  Event.OnEndBufferContent
 
-    Configurator.RegionsConfigurator ..>  Contract.IConfigurator
+    Configurator.RegionsConfigurator ..|>  Contract.IConfigurator
 
-    Determinator.RegionDeterminator ..>  Contract.IRegionDeterminator
+    Determinator.RegionDeterminator ..|>  Contract.IRegionDeterminator
     
     Cache.RuntimeCache ..>  Determinator.RegionDeterminator
 
@@ -196,8 +194,9 @@ package GGrach.Multiregionality {
 
     Contract.IRegionDeterminator --o  Facade.Regions
 
-    Repository.RegionsRepository --|> Bitrix.Main.Entity.DataManager
-    Repository.RegionsRepository ..>  Contract.IRegionsRepository
+    Bitrix.Main.Entity.DataManager ..> Repository.RegionsRepository
+
+    Repository.RegionsRepository ..|>  Contract.IRegionsRepository
 
     RegionsFactory ..>  Event.OnEndBufferContent
 }
