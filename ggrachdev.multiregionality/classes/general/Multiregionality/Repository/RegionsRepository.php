@@ -290,7 +290,7 @@ class RegionsRepository implements IRegionsRepository {
             }
         }
         
-        $handlers = \Bitrix\Main\EventManager::getInstance()->findEventHandlers("ggrachdev.multiregionality", "OnBeforeGetListRegions"); 
+        $handlers = \Bitrix\Main\EventManager::getInstance()->findEventHandlers("ggrachdev.multiregionality", "OnAfterGetListRegions"); 
 
         if(!empty($handlers)) {
             foreach ($handlers as $handler) {
