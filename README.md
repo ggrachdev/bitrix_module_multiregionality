@@ -47,3 +47,47 @@ $nowRegion->isDefaultRegion();
 ```php
 $regions = \GGrach\Multiregionality\RegionsFactory::getInstance('irkutsk.site.ru');
 ```
+
+События:
+```php
+// 1) OnAfterGetListRegions - После первичного получения регионов из репозитория, вторичное получение будет закешировано
+
+// Пример вызова:
+\Bitrix\Main\EventManager::getInstance()->addEventHandler(
+    'ggrachdev.multiregionality',
+    "OnAfterGetListRegions",
+    "OnAfterGetListRegionsHandler"
+);
+/**
+ * @param array<\GGrach\Multiregionality\Entity\Region> $arList - 
+ * @param array $arFilter - переданный фильтр
+ * @return type
+ */
+function OnAfterGetListRegionsHandler(array $arList, array $arFilter) {
+    return $arList;
+}
+
+
+// 2) OnAfterDeterminateRegionHandler - После определения текущего региона, нужно вернуть \GGrach\Multiregionality\Entity\Region
+
+// Пример создания слушателя:
+\Bitrix\Main\EventManager::getInstance()->addEventHandler(
+    'ggrachdev.multiregionality',
+    "OnAfterDeterminateRegion",
+    "OnAfterDeterminateRegionHandler"
+);
+
+/**
+ * @param string $url - Определенный модулем текущий url
+ * @param \GGrach\Multiregionality\Contract\IRegionsRepository $repository
+ * @param \GGrach\Multiregionality\Entity\Region $determinateRegion
+ * @return \GGrach\Multiregionality\Entity\Region
+ */
+function OnAfterDeterminateRegionHandler(
+    string $url, 
+    \GGrach\Multiregionality\Contract\IRegionsRepository $repository, 
+    \GGrach\Multiregionality\Entity\Region $determinateRegion
+) {
+    return $determinateRegion;
+}
+```
