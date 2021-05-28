@@ -41,6 +41,12 @@ $nowRegion->getData();
 // Получить данные вашего свойства, префикс PROPERTY_ писать не надо
 $nowRegion->getProperty('CUSTOM_PROPERTY_CODE');
 $nowRegion->isDefaultRegion();
+
+// Вместо вызова \GGrach\Multiregionality\RegionsFactory::getInstance() вы можете получить инстанцию:
+$regions = MRG();
+$arRegions = $regions->getRegionsData();
+$arRegions = MRG()->getRegionsData();
+// ...
 ```
 
 Если вам нужно определить текущий регион не исходя из текущего url, то передайте в фабрику параметр:
