@@ -17,8 +17,8 @@ class RegionDeterminator implements IRegionDeterminator {
         if (RuntimeCache::has($keyCache)) {
             return RuntimeCache::get($keyCache);
         }
-
-        $emptyRegion = new Region();
+        
+        $determinateRegion = null;
 
         $urlData = UrlParser::parse($url);
 
@@ -33,23 +33,39 @@ class RegionDeterminator implements IRegionDeterminator {
                         !empty($urlItemData['host']) &&
                         strcasecmp(trim($urlItemData['host']), trim($urlData['host'])) === 0
                     ) {
-                        RuntimeCache::set($keyCache, $region);
-                        return $region;
+                       $determinateRegion = $region;
+                       break;
                     }
                 }
 
-                // Если регион не установлен, то ставим регион по умолчанию как определенный
-                foreach ($arRegions as $region) {
-                    if ($region->isDefaultRegion()) {
-                        RuntimeCache::set($keyCache, $region);
-                        return $region;
-                    }
+                if($determinateRegion === null)
+                {
+                    // Если регион не установлен, то ставим регион по умолчанию как определенный
+                    foreach ($arRegions as $region) {
+                        if ($region->isDefaultRegion()) {
+                           $determinateRegion = $region;
+                           break;
+                        }
+                    } 
                 }
             }
         }
 
-        RuntimeCache::set($keyCache, $emptyRegion);
-        return $emptyRegion;
+        if($determinateRegion === null)
+        {
+            $determinateRegion = new Region();
+        }
+        
+        $handlers = \Bitrix\Main\EventManager::getInstance()->findEventHandlers("ggrachdev.multiregionality", "OnAfterDeterminateRegion"); 
+
+        if(!empty($handlers)) {
+            foreach ($handlers as $handler) {
+                $determinateRegion = \ExecuteModuleEvent($handler, $url, $repository, $determinateRegion);
+            }
+        }
+        
+        RuntimeCache::set($keyCache, $determinateRegion);
+        return $determinateRegion;
     }
 
 }
