@@ -35,11 +35,15 @@ package GGrach.Multiregionality {
             + setNameForms(array $arForms): void
             + setUrl(string $url): void
             + setData(array $data): void
+            + setLocationIds(array<int> $arLocationIds): void
+            + setPricesData(array $arPrices): void
             + setIsDefaultRegion(bool $value): void
             + getName(): string
             + getNameForms(): array
+            + getLocation(): array
             + getUrl(): string
             + getData(): array
+            + getTypePrices(): array
             + getProperty(string $propertyCode): array|null
             + isDefaultRegion(): bool
             ---
@@ -101,16 +105,14 @@ package GGrach.Multiregionality {
             + getCodePropertyFormName4() : string
             + getCodePropertyFormName5() : string
             + getCodePropertyFormName6() : string
+            + getCodePropertyLocations() : string
+            + getCodePropertyTypesPrice() : string
         }
     }
 
     namespace Configurator {
         class RegionsConfigurator {
-            - string $codeIblockRegionsApi = 'regionsMultiregionalityApiCode'
-            - string $cookieNowRegionName = 'NOW_REGION'
-            - string $urlCodeRegion = 'URL'
-            ---
-            Храним различные конфигурации с get set, реализуя IConfigurator
+            Храним различные конфигурации с get, реализуя IConfigurator
         }
     }
 
