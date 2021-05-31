@@ -9,6 +9,8 @@ final class Region {
     protected $isDefaultRegion;
     protected $nameForms = [];
     protected $url;
+    protected $arLocationIds;
+    protected $arLocationsData = null;
     protected $data = [];
 
     public function getId() {
@@ -17,6 +19,36 @@ final class Region {
 
     public function getName() {
         return $this->name;
+    }
+
+    public function setLocationIds(array $arLocationIds) {
+        $this->arLocationIds = \array_filter($arLocationIds, function($location) {
+            return \is_numeric($location) && $location > 0;
+        });
+    }
+
+    public function getLocations(): array {
+        if($this->arLocationsData === null)
+        {
+            if(!empty($this->arLocationIds) && \Bitrix\Main\Loader::includeModule('sale'))
+            {
+                $dbLocations = \Bitrix\Sale\Location\LocationTable::getList([
+                    'filter' => [
+                        '=ID' => $this->arLocationIds,
+                        'SALE_LOCATION_LOCATION_NAME_LANGUAGE_ID' => 'ru'
+                    ],
+                    'select' => [
+                        'ID',
+                        'CODE',
+                        'NAME'
+                    ]
+                ]);
+                
+                $this->arLocationsData = $dbLocations->fetchAll();
+            }
+        }
+        
+        return $this->arLocationsData;
     }
 
     public function getNameForms(): array {

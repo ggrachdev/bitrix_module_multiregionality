@@ -34,7 +34,8 @@ class RegionsRepository implements IRegionsRepository {
 
     public function create(): bool {
         $resultCreate = false;
-
+        $iblockId = null;
+        
         if (empty($this->iblockIdRepository)) {
 
             global $DB;
@@ -109,87 +110,98 @@ class RegionsRepository implements IRegionsRepository {
             if ($resultCreate) {
                 $this->iblockIdRepository = $iblockId;
             }
-
-            if ($resultCreate) {
-                $propId = (new \CIBlockProperty())->Add([
-                    "NAME" => "URL региона",
-                    "ACTIVE" => "Y",
-                    "SORT" => 1000,
-                    "CODE" => $this->configurator->getCodePropertyUrlRegion(),
-                    "PROPERTY_TYPE" => "S",
-                    "IBLOCK_ID" => $iblockId
-                ]);
-
-                $propId = (new \CIBlockProperty())->Add([
-                    "NAME" => "Форма имени региона (Какой?) 1 #FORM_NAME_REGION_1#",
-                    "ACTIVE" => "Y",
-                    "SORT" => 1100,
-                    "CODE" => $this->configurator->getCodePropertyFormName1(),
-                    "PROPERTY_TYPE" => "S",
-                    "IBLOCK_ID" => $iblockId
-                ]);
-
-                $propId = (new \CIBlockProperty())->Add([
-                    "NAME" => "Форма имени региона (Какое?) 2 #FORM_NAME_REGION_2#",
-                    "ACTIVE" => "Y",
-                    "SORT" => 1200,
-                    "CODE" => $this->configurator->getCodePropertyFormName2(),
-                    "PROPERTY_TYPE" => "S",
-                    "IBLOCK_ID" => $iblockId
-                ]);
-
-                $propId = (new \CIBlockProperty())->Add([
-                    "NAME" => "Форма имени региона (Какая?) 3 #FORM_NAME_REGION_3#",
-                    "ACTIVE" => "Y",
-                    "SORT" => 1300,
-                    "CODE" => $this->configurator->getCodePropertyFormName3(),
-                    "PROPERTY_TYPE" => "S",
-                    "IBLOCK_ID" => $iblockId
-                ]);
-
-                $propId = (new \CIBlockProperty())->Add([
-                    "NAME" => "Форма имени региона (Какие?) 4 #FORM_NAME_REGION_4#",
-                    "ACTIVE" => "Y",
-                    "SORT" => 1400,
-                    "CODE" => $this->configurator->getCodePropertyFormName4(),
-                    "PROPERTY_TYPE" => "S",
-                    "IBLOCK_ID" => $iblockId
-                ]);
-
-                $propId = (new \CIBlockProperty())->Add([
-                    "NAME" => "Форма имени региона (Где?) 5 #FORM_NAME_REGION_5#",
-                    "ACTIVE" => "Y",
-                    "SORT" => 1500,
-                    "CODE" => $this->configurator->getCodePropertyFormName5(),
-                    "PROPERTY_TYPE" => "S",
-                    "IBLOCK_ID" => $iblockId
-                ]);
-
-                $propId = (new \CIBlockProperty())->Add([
-                    "NAME" => "Форма имени региона (Откуда? Из?) 6 #FORM_NAME_REGION_6#",
-                    "ACTIVE" => "Y",
-                    "SORT" => 1600,
-                    "CODE" => $this->configurator->getCodePropertyFormName6(),
-                    "PROPERTY_TYPE" => "S",
-                    "IBLOCK_ID" => $iblockId
-                ]);
-
-                $propId = (new \CIBlockProperty())->Add([
-                    "NAME" => "Устанавливать регион по умолчанию",
-                    "ACTIVE" => "Y",
-                    "SORT" => 1600,
-                    "CODE" => $this->configurator->getCodePropertyIsDefaultRegion(),
-                    "PROPERTY_TYPE" => "L",
-                    "LIST_TYPE" => "C", // Тип списка - "флажки"
-                    "VALUES" => [
-                        "VALUE" => "да",
-                    ],
-                    "IBLOCK_ID" => $iblockId
-                ]);
-            }
         } else {
             $iblockId = $this->iblockIdRepository;
         }
+        
+        if ($iblockId) {
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "URL региона",
+                "ACTIVE" => "Y",
+                "SORT" => 1000,
+                "CODE" => $this->configurator->getCodePropertyUrlRegion(),
+                "PROPERTY_TYPE" => "S",
+                "IBLOCK_ID" => $iblockId
+            ]);
+
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "Форма имени региона (Какой?) 1 #FORM_NAME_REGION_1#",
+                "ACTIVE" => "Y",
+                "SORT" => 1100,
+                "CODE" => $this->configurator->getCodePropertyFormName1(),
+                "PROPERTY_TYPE" => "S",
+                "IBLOCK_ID" => $iblockId
+            ]);
+
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "Форма имени региона (Какое?) 2 #FORM_NAME_REGION_2#",
+                "ACTIVE" => "Y",
+                "SORT" => 1200,
+                "CODE" => $this->configurator->getCodePropertyFormName2(),
+                "PROPERTY_TYPE" => "S",
+                "IBLOCK_ID" => $iblockId
+            ]);
+
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "Форма имени региона (Какая?) 3 #FORM_NAME_REGION_3#",
+                "ACTIVE" => "Y",
+                "SORT" => 1300,
+                "CODE" => $this->configurator->getCodePropertyFormName3(),
+                "PROPERTY_TYPE" => "S",
+                "IBLOCK_ID" => $iblockId
+            ]);
+
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "Форма имени региона (Какие?) 4 #FORM_NAME_REGION_4#",
+                "ACTIVE" => "Y",
+                "SORT" => 1400,
+                "CODE" => $this->configurator->getCodePropertyFormName4(),
+                "PROPERTY_TYPE" => "S",
+                "IBLOCK_ID" => $iblockId
+            ]);
+
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "Форма имени региона (Где?) 5 #FORM_NAME_REGION_5#",
+                "ACTIVE" => "Y",
+                "SORT" => 1500,
+                "CODE" => $this->configurator->getCodePropertyFormName5(),
+                "PROPERTY_TYPE" => "S",
+                "IBLOCK_ID" => $iblockId
+            ]);
+
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "Форма имени региона (Откуда? Из?) 6 #FORM_NAME_REGION_6#",
+                "ACTIVE" => "Y",
+                "SORT" => 1600,
+                "CODE" => $this->configurator->getCodePropertyFormName6(),
+                "PROPERTY_TYPE" => "S",
+                "IBLOCK_ID" => $iblockId
+            ]);
+
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "Устанавливать регион по умолчанию",
+                "ACTIVE" => "Y",
+                "SORT" => 1700,
+                "CODE" => $this->configurator->getCodePropertyIsDefaultRegion(),
+                "PROPERTY_TYPE" => "L",
+                "LIST_TYPE" => "C", // Тип списка - "флажки"
+                "VALUES" => [
+                    "VALUE" => "да",
+                ],
+                "IBLOCK_ID" => $iblockId
+            ]);
+
+            $propId = (new \CIBlockProperty())->Add([
+                "NAME" => "Локации региона",
+                "ACTIVE" => "Y",
+                "MULTIPLE" => "Y",
+                "SORT" => 1800,
+                "CODE" => $this->configurator->getCodePropertyLocations(),
+                "PROPERTY_TYPE" => "S",
+                "IBLOCK_ID" => $iblockId
+            ]);
+        }
+        
         return $resultCreate;
     }
 
@@ -216,7 +228,8 @@ class RegionsRepository implements IRegionsRepository {
                 $this->configurator->getCodePropertyFormName4() . '_' => $this->configurator->getCodePropertyFormName4(),
                 $this->configurator->getCodePropertyFormName5() . '_' => $this->configurator->getCodePropertyFormName5(),
                 $this->configurator->getCodePropertyFormName6() . '_' => $this->configurator->getCodePropertyFormName6(),
-                $this->configurator->getCodePropertyIsDefaultRegion() . '_' => $this->configurator->getCodePropertyIsDefaultRegion()
+                $this->configurator->getCodePropertyIsDefaultRegion() . '_' => $this->configurator->getCodePropertyIsDefaultRegion(),
+                $this->configurator->getCodePropertyLocations() . '_' => $this->configurator->getCodePropertyLocations(),
             ];
 
             $propertyList = $this->getPropertyListIblock();
@@ -384,6 +397,7 @@ class RegionsRepository implements IRegionsRepository {
             }
 
             $region->setData($correctData);
+            $region->setLocationIds($region->getProperty($this->configurator->getCodePropertyLocations()));
         }
     }
 

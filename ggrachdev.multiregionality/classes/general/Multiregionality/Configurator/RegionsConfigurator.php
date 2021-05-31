@@ -49,6 +49,10 @@ final class RegionsConfigurator implements IConfigurator {
     public function getCodePropertyFormName6(): string {
         return 'NAME_FORM_6';
     }
+    
+    public function getCodePropertyLocations(): string {
+        return 'IDS_LOCATIONS';
+    }
 
     public function getCodePropertyIsDefaultRegion(): string {
         return 'IS_DEFAULT_REGION';

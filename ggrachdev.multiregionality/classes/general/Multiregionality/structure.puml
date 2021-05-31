@@ -35,9 +35,11 @@ package GGrach.Multiregionality {
             + setNameForms(array $arForms): void
             + setUrl(string $url): void
             + setData(array $data): void
+            + setLocationIds(array<int> $arLocationIds): void
             + setIsDefaultRegion(bool $value): void
             + getName(): string
             + getNameForms(): array
+            + getLocation(): array
             + getUrl(): string
             + getData(): array
             + getProperty(string $propertyCode): array|null
