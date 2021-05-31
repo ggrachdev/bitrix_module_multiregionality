@@ -46,6 +46,12 @@ $nowRegion->isDefaultRegion();
 $regions = MRG();
 $arRegions = $regions->getRegionsData();
 $arRegions = MRG()->getRegionsData();
+
+// Данные о привязанных локациях
+MRG()->getNowRegionData()->getLocations();
+
+// Данные о привязанных типах цен к данному региону
+MRG()->getNowRegionData()->getTypePrices();
 // ...
 ```
 
