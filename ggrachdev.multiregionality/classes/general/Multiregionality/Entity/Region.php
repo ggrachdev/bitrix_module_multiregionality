@@ -11,6 +11,7 @@ final class Region {
     protected $url;
     protected $arLocationIds;
     protected $arLocationsData = null;
+    protected $arPricesData = [];
     protected $data = [];
 
     public function getId() {
@@ -21,10 +22,36 @@ final class Region {
         return $this->name;
     }
 
-    public function setLocationIds(array $arLocationIds) {
+    public function setLocationIds($arLocationIds) {
         $this->arLocationIds = \array_filter($arLocationIds, function($location) {
             return \is_numeric($location) && $location > 0;
         });
+    }
+
+    public function setPricesData($arPrices) {
+        
+        $arPricesData = [];
+        
+        if(!empty($arPrices)) {
+            foreach ($arPrices as $arPrice) {
+                if(
+                    isset($arPrice['VALUE']) && 
+                    isset($arPrice['ID'])
+                )
+                {
+                    $arPricesData[] = [
+                      'CODE' => $arPrice['VALUE'],
+                      'ID' => $arPrice['ID']
+                    ];
+                }
+            }
+        }
+        
+        $this->arPricesData = $arPricesData;
+    }
+
+    public function getTypePrices(): array {
+        return $this->arPricesData;
     }
 
     public function getLocations(): array {
@@ -47,6 +74,10 @@ final class Region {
                 ]);
                 
                 $this->arLocationsData = $dbLocations->fetchAll();
+            }
+            else
+            {
+                $this->arLocationsData = [];
             }
         }
         

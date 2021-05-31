@@ -422,6 +422,7 @@ class RegionsRepository implements IRegionsRepository {
 
             $region->setData($correctData);
             $region->setLocationIds($region->getProperty($this->configurator->getCodePropertyLocations()));
+            $region->setPricesData($region->getProperty($this->configurator->getCodePropertyTypesPrice()));
         }
     }
 
