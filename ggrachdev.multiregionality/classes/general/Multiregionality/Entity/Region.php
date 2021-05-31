@@ -32,6 +32,8 @@ final class Region {
         {
             if(!empty($this->arLocationIds) && \Bitrix\Main\Loader::includeModule('sale'))
             {
+                $arPriceIds = [];
+                        
                 $dbLocations = \Bitrix\Sale\Location\LocationTable::getList([
                     'filter' => [
                         '=ID' => $this->arLocationIds,

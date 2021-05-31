@@ -30,4 +30,6 @@ interface IConfigurator {
     public function getCodePropertyFormName6(): string;
     
     public function getCodePropertyLocations(): string;
+    
+    public function getCodePropertyTypesPrice(): string;
 }

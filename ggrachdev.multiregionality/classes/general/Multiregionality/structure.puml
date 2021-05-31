@@ -103,16 +103,14 @@ package GGrach.Multiregionality {
             + getCodePropertyFormName4() : string
             + getCodePropertyFormName5() : string
             + getCodePropertyFormName6() : string
+            + getCodePropertyLocations() : string
+            + getCodePropertyTypesPrice() : string
         }
     }
 
     namespace Configurator {
         class RegionsConfigurator {
-            - string $codeIblockRegionsApi = 'regionsMultiregionalityApiCode'
-            - string $cookieNowRegionName = 'NOW_REGION'
-            - string $urlCodeRegion = 'URL'
-            ---
-            Храним различные конфигурации с get set, реализуя IConfigurator
+            Храним различные конфигурации с get, реализуя IConfigurator
         }
     }
 

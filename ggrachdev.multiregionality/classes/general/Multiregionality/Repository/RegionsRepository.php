@@ -200,6 +200,30 @@ class RegionsRepository implements IRegionsRepository {
                 "PROPERTY_TYPE" => "S",
                 "IBLOCK_ID" => $iblockId
             ]);
+
+            if(\Bitrix\Main\Loader::includeModule('catalog'))
+            {
+                $arPrices = [];
+
+                $dbPriceType = \CCatalogGroup::GetList();
+                while ($arPriceType = $dbPriceType->Fetch()) {
+                    $arPrices[] = [
+                        'VALUE' => $arPriceType['NAME'],
+                        'XML_ID' => $arPriceType['ID']
+                    ];
+                }
+
+                $propId = (new \CIBlockProperty())->Add([
+                    "NAME" => "Типы цен региона",
+                    "ACTIVE" => "Y",
+                    "MULTIPLE" => "Y",
+                    "SORT" => 1900,
+                    "CODE" => $this->configurator->getCodePropertyTypesPrice(),
+                    "PROPERTY_TYPE" => "L",
+                    "VALUES" => $arPrices,
+                    "IBLOCK_ID" => $iblockId
+                ]);
+            }
         }
         
         return $resultCreate;
