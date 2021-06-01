@@ -110,7 +110,7 @@ package GGrach.Multiregionality {
         }
     }
 
-    namespace Properties {
+    namespace Property {
         class PriceTypeProperty {
         }
         class StoreProperty {
