@@ -130,7 +130,7 @@ package GGrach.Multiregionality {
             Заменяем плейсхолдеры на странице, вставляем JS исходя из PHP
         }
         class OnIBlockPropertyBuildList {
-            +listen()
+            +{static } initialize()
             ---
             Добавляем кастомные поля в админку
         }
