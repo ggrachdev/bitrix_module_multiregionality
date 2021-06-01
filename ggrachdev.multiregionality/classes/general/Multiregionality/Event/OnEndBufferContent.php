@@ -7,7 +7,7 @@ use GGrach\Multiregionality\Utils\RegionChunksTextCorrector;
     
 class OnEndBufferContent {
     
-    public function setChunks(&$content) {
+    public function listen(&$content) {
         
         $factory = RegionsFactory::getInstance();
         

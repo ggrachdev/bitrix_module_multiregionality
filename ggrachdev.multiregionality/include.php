@@ -11,6 +11,7 @@ if (!\CSite::InDir('/bitrix')) {
         "\GGrach\Multiregionality\Facade\Regions" => "classes/general/Multiregionality/Facade/Regions.php",
         // Events
         "\GGrach\Multiregionality\Event\OnEndBufferContent" => "classes/general/Multiregionality/Event/OnEndBufferContent.php",
+        "\GGrach\Multiregionality\Event\OnIBlockPropertyBuildList" => "classes/general/Multiregionality/Event/OnIBlockPropertyBuildList.php",
         // Entity
         "\GGrach\Multiregionality\Entity\Region" => "classes/general/Multiregionality/Entity/Region.php",
         // Contracts
@@ -34,7 +35,7 @@ if (!\CSite::InDir('/bitrix')) {
         "OnEndBufferContent",
         [
             "\\GGrach\\Multiregionality\\Event\\OnEndBufferContent",
-            "setChunks"
+            "listen"
         ]
     );
 
@@ -42,5 +43,9 @@ if (!\CSite::InDir('/bitrix')) {
         return \GGrach\Multiregionality\RegionsFactory::getInstance();
     }
 
+}
+else
+{
+    
 }
 ?>
