@@ -37,6 +37,7 @@ package GGrach.Multiregionality {
             + setData(array $data): void
             + setLocationIds(array<int> $arLocationIds): void
             + setPricesData(array $arPrices): void
+            + setStoresData(array $arStores): void
             + setIsDefaultRegion(bool $value): void
             + getName(): string
             + getNameForms(): array
@@ -44,6 +45,7 @@ package GGrach.Multiregionality {
             + getUrl(): string
             + getData(): array
             + getTypePrices(): array
+            + getStores(): array
             + getProperty(string $propertyCode): array|null
             + isDefaultRegion(): bool
             ---
@@ -107,6 +109,14 @@ package GGrach.Multiregionality {
             + getCodePropertyFormName6() : string
             + getCodePropertyLocations() : string
             + getCodePropertyTypesPrice() : string
+            + getCodePropertyStores() : string
+        }
+    }
+
+    namespace Property {
+        class PriceTypeProperty {
+        }
+        class StoreProperty {
         }
     }
 
@@ -121,6 +131,11 @@ package GGrach.Multiregionality {
             +listen()
             ---
             Заменяем плейсхолдеры на странице, вставляем JS исходя из PHP
+        }
+        class OnIBlockPropertyBuildList {
+            +{static } initialize()
+            ---
+            Добавляем кастомные поля в админку
         }
     }
 

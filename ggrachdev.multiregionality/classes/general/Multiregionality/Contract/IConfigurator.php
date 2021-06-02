@@ -32,4 +32,6 @@ interface IConfigurator {
     public function getCodePropertyLocations(): string;
     
     public function getCodePropertyTypesPrice(): string;
+    
+    public function getCodePropertyStores(): string;
 }

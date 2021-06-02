@@ -12,6 +12,7 @@ final class Region {
     protected $arLocationIds;
     protected $arLocationsData = null;
     protected $arPricesData = [];
+    protected $arStoresData = [];
     protected $data = [];
 
     public function getId() {
@@ -33,21 +34,53 @@ final class Region {
         $arPricesData = [];
         
         if(!empty($arPrices)) {
-            foreach ($arPrices as $arPrice) {
-                if(
-                    isset($arPrice['VALUE']) && 
-                    isset($arPrice['ID'])
-                )
+            
+            $arPrices = \unserialize($arPrices);
+            
+            foreach ($arPrices as $priceValueDb) {
+                    
+                if($priceValueDb[0] != '0')
                 {
+                    $arPrice = explode('###', $priceValueDb[0]);
+                    
                     $arPricesData[] = [
-                      'CODE' => $arPrice['VALUE'],
-                      'ID' => $arPrice['ID']
+                      'ID' => $arPrice[1],
+                      'CODE' => $arPrice[0]
                     ];
                 }
             }
         }
         
         $this->arPricesData = $arPricesData;
+    }
+
+    public function setStoresData($arStores) {
+        
+        $arStoresData = [];
+        
+        if(!empty($arStores)) {
+            
+            $arStores = \unserialize($arStores);
+            
+            foreach ($arStores as $storeValueDb) {
+                    
+                if($storeValueDb[0] != '0')
+                {
+                    $arStore = explode('###', $storeValueDb[0]);
+                    
+                    $arStoresData[] = [
+                      'ID' => $arStore[1],
+                      'TITLE' => $arStore[0]
+                    ];
+                }
+            }
+        }
+        
+        $this->arStoresData = $arStoresData;
+    }
+
+    public function getStores(): array {
+        return $this->arStoresData;
     }
 
     public function getTypePrices(): array {
