@@ -66,4 +66,8 @@ final class RegionsConfigurator implements IConfigurator {
         return 'TYPES_PRICE';
     }
 
+    public function getCodePropertyStores(): string {
+        return 'STORES';
+    }
+
 }

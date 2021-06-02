@@ -7,7 +7,7 @@ class StoreProperty {
     public function GetUserTypeDescription() {
         return [
             "PROPERTY_TYPE" => "S",
-            "USER_TYPE" => "STORAGE",
+            "USER_TYPE" => "STORES",
             "DESCRIPTION" => "Склады",
             "GetPropertyFieldHtml" => [StoreProperty::class, 'GetPropertyFieldHtml'],
             'ConvertToDB' => [StoreProperty::class, 'ConvertToDB'],

@@ -107,6 +107,7 @@ package GGrach.Multiregionality {
             + getCodePropertyFormName6() : string
             + getCodePropertyLocations() : string
             + getCodePropertyTypesPrice() : string
+            + getCodePropertyStores() : string
         }
     }
 
