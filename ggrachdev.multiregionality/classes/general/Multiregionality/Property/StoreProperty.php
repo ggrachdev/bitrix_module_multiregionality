@@ -26,11 +26,11 @@ class StoreProperty {
             $dbStorageType = \CCatalogStore::GetList(["SORT" => "ASC", "ID" => "ASC"]);
             while ($arStorageType = $dbStorageType->Fetch()) {
                 $selected = '';
-                if (in_array($arStorageType['ID'], $value['VALUE'])) {
+                if (in_array($arStorageType['TITLE'] . '###' . $arStorageType['ID'], $value['VALUE'])) {
                     $selected = 'selected';
                 }
 
-                $html .= '<option value="' . $arStorageType['ID'] . '" ' . $selected . '>[' . $arStorageType['ID'] . '] ' . $arStorageType['TITLE'] . '</option>';
+                $html .= '<option value="' . $arStorageType['TITLE'] . '###' . $arStorageType['ID'] . '" ' . $selected . '>[' . $arStorageType['ID'] . '] ' . $arStorageType['TITLE'] . '</option>';
             }
             $html .= '</select>';
         }

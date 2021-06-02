@@ -33,15 +33,18 @@ final class Region {
         $arPricesData = [];
         
         if(!empty($arPrices)) {
-            foreach ($arPrices as $arPrice) {
-                if(
-                    isset($arPrice['VALUE']) && 
-                    isset($arPrice['ID'])
-                )
+            
+            $arPrices = \unserialize($arPrices);
+            
+            foreach ($arPrices as $priceValueDb) {
+                    
+                if($priceValueDb[0] != '0')
                 {
+                    $arPrice = explode('###', $priceValueDb[0]);
+                    
                     $arPricesData[] = [
-                      'CODE' => $arPrice['VALUE'],
-                      'ID' => $arPrice['ID']
+                      'ID' => $arPrice[1],
+                      'CODE' => $arPrice[0]
                     ];
                 }
             }

@@ -26,11 +26,11 @@ class PriceTypeProperty {
             $dbPriceType = \CCatalogGroup::GetList(["SORT" => "ASC", "ID" => "ASC"]);
             while ($arPriceType = $dbPriceType->Fetch()) {
                 $selected = '';
-                if (in_array($arPriceType['NAME'], $value['VALUE'])) {
+                if (in_array($arPriceType['NAME']. '###' . $arPriceType['ID'], $value['VALUE'])) {
                     $selected = 'selected';
                 }
 
-                $html .= '<option value="' . $arPriceType['NAME'] . '" ' . $selected . '>[' . $arPriceType['ID'] . '] ' . $arPriceType['NAME'] . '</option>';
+                $html .= '<option value="' . $arPriceType['NAME'] . '###' . $arPriceType['ID'] . '" ' . $selected . '>[' . $arPriceType['ID'] . '] ' . $arPriceType['NAME'] . '</option>';
             }
             $html .= '</select>';
         }
