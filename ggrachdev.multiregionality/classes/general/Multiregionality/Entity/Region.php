@@ -12,6 +12,7 @@ final class Region {
     protected $arLocationIds;
     protected $arLocationsData = null;
     protected $arPricesData = [];
+    protected $arStoresData = [];
     protected $data = [];
 
     public function getId() {
@@ -51,6 +52,35 @@ final class Region {
         }
         
         $this->arPricesData = $arPricesData;
+    }
+
+    public function setStoresData($arStores) {
+        
+        $arStoresData = [];
+        
+        if(!empty($arStores)) {
+            
+            $arStores = \unserialize($arStores);
+            
+            foreach ($arStores as $storeValueDb) {
+                    
+                if($storeValueDb[0] != '0')
+                {
+                    $arStore = explode('###', $storeValueDb[0]);
+                    
+                    $arStoresData[] = [
+                      'ID' => $arStore[1],
+                      'TITLE' => $arStore[0]
+                    ];
+                }
+            }
+        }
+        
+        $this->arStoresData = $arStoresData;
+    }
+
+    public function getStores(): array {
+        return $this->arStoresData;
     }
 
     public function getTypePrices(): array {

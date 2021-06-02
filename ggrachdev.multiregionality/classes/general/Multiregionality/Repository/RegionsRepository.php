@@ -281,6 +281,7 @@ class RegionsRepository implements IRegionsRepository {
                 $this->configurator->getCodePropertyIsDefaultRegion() . '_' => $this->configurator->getCodePropertyIsDefaultRegion(),
                 $this->configurator->getCodePropertyLocations() . '_' => $this->configurator->getCodePropertyLocations(),
                 $this->configurator->getCodePropertyTypesPrice() . '_' => $this->configurator->getCodePropertyTypesPrice(),
+                $this->configurator->getCodePropertyStores() . '_' => $this->configurator->getCodePropertyStores(),
             ];
 
             $propertyList = $this->getPropertyListIblock();
@@ -450,6 +451,7 @@ class RegionsRepository implements IRegionsRepository {
             $region->setData($correctData);
             $region->setLocationIds($region->getProperty($this->configurator->getCodePropertyLocations()));
             $region->setPricesData($region->getProperty($this->configurator->getCodePropertyTypesPrice()));
+            $region->setStoresData($region->getProperty($this->configurator->getCodePropertyStores()));
         }
     }
 
